@@ -34,6 +34,20 @@ Customer Bank is a cutting-edge **AI-powered customer intelligence platform** de
 
 ---
 
+## 📸 Application Screenshots
+
+Get a visual preview of the Customer Bank platform's intuitive interface and powerful features:
+
+### 🔐 **Secure Authentication**
+![Authentication Form](screenshots/auth.png)
+*Clean, professional login interface with randomly generated secure passwords for admin access*
+
+### 📊 **Comprehensive Dashboard**
+![Main Dashboard](screenshots/dashboard.png)
+*Central command center featuring customer analytics, AI insights, and quick access to all platform features*
+
+---
+
 ## ✨ Key Features
 
 ### 🎯 **AI-Powered Product Matching**
