@@ -2,8 +2,6 @@
 
 This document provides step-by-step instructions for deploying the Customer App to a Digital Ocean droplet.
 
-> **📖 Note:** This is the primary deployment documentation. It replaces any older deployment guides and provides the most up-to-date, generic instructions for deploying this application.
-
 ## Quick Start
 
 For experienced users who want to deploy quickly:
