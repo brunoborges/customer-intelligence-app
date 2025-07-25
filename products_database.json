@@ -1,0 +1,391 @@
+[
+  {
+    "id": "PL001",
+    "name": "🏦 Customer Bank Personal Loan",
+    "type": "loan",
+    "description": "Take advantage of our competitive personal loan with rates as low as 5.99% APR. Whether you're consolidating debt, financing a home improvement project, or covering unexpected expenses, our personal l...",
+    "detailedDescription": "Take advantage of our competitive personal loan with rates as low as 5.99% APR. Whether you're consolidating debt, financing a home improvement project, or covering unexpected expenses, our personal loan offers flexible terms from 2 to 7 years with loan amounts up to $50,000. No collateral required and funds can be available as soon as the next business day after approval.",
+    "terms": {
+      "interestRate": "6.99% APR",
+      "minimumAmount": "$1,000",
+      "maximumAmount": "$50,000",
+      "termLength": "2-7 years"
+    },
+    "expiryDate": "December 31, 2025",
+    "offerCode": "PL2025",
+    "campaign": "winter_personal_loans",
+    "status": "active",
+    "metadata": {
+      "source": "sample_data",
+      "version": "1.0"
+    },
+    "createdAt": "2025-07-18T23:29:50.687Z",
+    "updatedAt": "2025-07-18T23:29:50.691Z"
+  },
+  {
+    "id": "CC001",
+    "name": "🏦 Customer Bank Rewards Credit Card",
+    "type": "loan",
+    "description": "Earn 2% cash back on all purchases with our new 🏦 Customer Bank Rewards Credit Card. Enjoy a 0% intro APR for the first 15 months on purchases and balance transfers, plus no annual fee ever. You'll also receive a...",
+    "detailedDescription": "Earn 2% cash back on all purchases with our new 🏦 Customer Bank Rewards Credit Card. Enjoy a 0% intro APR for the first 15 months on purchases and balance transfers, plus no annual fee ever. You'll also receive a $200 welcome bonus after spending $1,000 in the first 3 months. Additional benefits include travel insurance, purchase protection, and 24/7 fraud monitoring.",
+    "terms": {
+      "interestRate": "6.99% APR",
+      "minimumAmount": "$1,000",
+      "maximumAmount": "$50,000",
+      "termLength": "2-7 years"
+    },
+    "expiryDate": "January 15, 2026",
+    "offerCode": "CC2025",
+    "campaign": "new_year_credit_cards",
+    "status": "active",
+    "metadata": {
+      "source": "sample_data",
+      "version": "1.0"
+    },
+    "createdAt": "2025-07-18T23:29:50.693Z",
+    "updatedAt": "2025-07-18T23:29:50.693Z"
+  },
+  {
+    "id": "MG001",
+    "name": "🏦 Customer Bank Home Mortgage",
+    "type": "loan",
+    "description": "Make your homeownership dreams a reality with our competitive mortgage rates starting at 6.25% APR for qualified buyers. We offer conventional, FHA, VA, and jumbo loans with down payments as low as 3%...",
+    "detailedDescription": "Make your homeownership dreams a reality with our competitive mortgage rates starting at 6.25% APR for qualified buyers. We offer conventional, FHA, VA, and jumbo loans with down payments as low as 3%. Our experienced loan officers will guide you through every step of the process, and we can often close in as little as 21 days. First-time homebuyer programs available.",
+    "terms": {
+      "interestRate": "6.99% APR",
+      "minimumAmount": "$1,000",
+      "maximumAmount": "$50,000",
+      "termLength": "2-7 years"
+    },
+    "expiryDate": "March 30, 2026",
+    "offerCode": "MG2025",
+    "campaign": "spring_home_buying",
+    "status": "active",
+    "metadata": {
+      "source": "sample_data",
+      "version": "1.0"
+    },
+    "createdAt": "2025-07-18T23:29:50.694Z",
+    "updatedAt": "2025-07-18T23:29:50.694Z"
+  },
+  {
+    "id": "customer_creditcard_2024",
+    "name": "🏦 Customer Bank Cashback Card",
+    "type": "credit-card",
+    "description": "A no-annual-fee credit card offering competitive cashback rewards for everyday purchases.",
+    "detailedDescription": "The 🏦 Customer Bank Cashback Card is designed for general consumers who want to earn rewards without worrying about annual fees. Earn cashback on every purchase you make, with no hidden costs or complex reward structures. Enjoy peace of mind with our secure and user-friendly credit card management tools.",
+    "features": [
+      "1.5% cashback on all purchases",
+      "No annual fee",
+      "0% intro APR on purchases for the first 12 months"
+    ],
+    "benefits": [
+      "Unlimited cashback on all spending categories",
+      "Access to exclusive offers and discounts",
+      "Enhanced security features including fraud protection"
+    ],
+    "terms": {
+      "interestRate": "17.99% APR",
+      "minimumAmount": "$500",
+      "maximumAmount": "$50,000",
+      "termLength": "N/A",
+      "fees": "Late payment fee: $40; Foreign transaction fee: 3%",
+      "eligibilityRequirements": "Must be 18+, U.S. resident, with a valid social security number and email address"
+    },
+    "targetAudience": {
+      "primaryMarket": "General consumers looking for value and simplicity in a credit card",
+      "creditScoreRange": "650-850",
+      "incomeRequirement": "$25,000+",
+      "demographics": "Ages 21-65, located in urban and suburban areas"
+    },
+    "competitiveAdvantages": [
+      "No annual fee combined with competitive cashback rate",
+      "Introductory 0% APR on purchases"
+    ],
+    "marketingCopy": {
+      "headline": "Unlock Rewards, Simplify Spending",
+      "subheadline": "No annual fee, unlimited cashback.",
+      "callToAction": "Apply now and start earning!"
+    },
+    "riskAssessment": {
+      "riskLevel": "Medium",
+      "mitigationStrategies": [
+        "Proactive account monitoring for unusual activity",
+        "Strong credit score requirement to minimize default risk"
+      ]
+    },
+    "regulatoryCompliance": [
+      "Compliance with the Credit Card Accountability Responsibility and Disclosure Act of 2009",
+      "Adherence to Truth in Lending Act (TILA)"
+    ],
+    "launchTimeline": "Q2 2024",
+    "campaign": "cashback_simplicity_campaign",
+    "offerCode": "CUSTCC2024",
+    "expiryDate": "2025-12-31",
+    "metadata": {
+      "generatedAt": "2025-07-18T23:29:58.094Z",
+      "generatedBy": "OpenAI GPT-4",
+      "version": "1.0",
+      "status": "draft"
+    },
+    "createdAt": "2025-07-18T23:29:58.094Z",
+    "updatedAt": "2025-07-18T23:29:58.094Z",
+    "status": "active"
+  },
+  {
+    "id": "customer_hnw_travel_card_2023",
+    "name": "🏦 Customer Bank Elite Travel Card",
+    "type": "credit-card",
+    "description": "A premium credit card offering high-value benefits tailored for high net worth individuals, with no annual fee and rewarding travel points.",
+    "detailedDescription": "The 🏦 Customer Bank Elite Travel Card is designed for discerning high net worth individuals who demand more from their credit card. With no annual fee, earn travel points on every purchase, and enjoy exclusive benefits through our partnership with Air Canada. Whether you're flying for business or leisure, experience a seamless journey with lounge access, priority boarding, and more.",
+    "features": [
+      "No annual fee",
+      "Earn 3x travel points on Air Canada purchases",
+      "Complimentary access to select airport lounges"
+    ],
+    "benefits": [
+      "Priority boarding on Air Canada flights",
+      "24/7 dedicated concierge service",
+      "Global travel insurance coverage"
+    ],
+    "terms": {
+      "interestRate": "15.99% APR",
+      "minimumAmount": "$1,000",
+      "maximumAmount": "$10,000",
+      "termLength": "Revolving credit, no fixed term",
+      "fees": "No annual fee, foreign transaction fee of 1%",
+      "eligibilityRequirements": "Minimum annual income of $150,000, credit score of 720+"
+    },
+    "targetAudience": {
+      "primaryMarket": "High net worth individuals seeking premium travel benefits",
+      "creditScoreRange": "720-850",
+      "incomeRequirement": "$150,000+",
+      "demographics": "Aged 30-60, primarily urban-based with frequent travel"
+    },
+    "competitiveAdvantages": [
+      "No annual fee compared to competitors",
+      "Enhanced travel benefits with Air Canada partnership"
+    ],
+    "marketingCopy": {
+      "headline": "Experience Elite Travel with No Annual Fee",
+      "subheadline": "Unlock premium travel rewards and exclusive benefits.",
+      "callToAction": "Apply now to elevate your travel experience."
+    },
+    "riskAssessment": {
+      "riskLevel": "Medium",
+      "mitigationStrategies": [
+        "Rigorous eligibility screening",
+        "Continuous monitoring of credit usage patterns"
+      ]
+    },
+    "regulatoryCompliance": [
+      "Consumer Financial Protection Bureau (CFPB) regulations",
+      "Truth in Lending Act (TILA)"
+    ],
+    "launchTimeline": "Q1 2024",
+    "campaign": "Fly High with 🏦 Customer Bank",
+    "offerCode": "CUSTFLY2024",
+    "expiryDate": "2025-12-31",
+    "metadata": {
+      "generatedAt": "2025-07-18T23:33:26.465Z",
+      "generatedBy": "OpenAI GPT-4",
+      "version": "1.0",
+      "status": "draft"
+    },
+    "createdAt": "2025-07-18T23:33:26.465Z",
+    "updatedAt": "2025-07-18T23:33:26.465Z",
+    "status": "active"
+  },
+  {
+    "id": "customer_mba_loan_2024",
+    "name": "MBA Student Loan",
+    "type": "student_loan",
+    "description": "A tailored loan product for Executive MBA students at Simon Fraser University, offering 0% interest with no annual fees.",
+    "detailedDescription": "The Executive MBA Student Loan is designed to support ambitious students pursuing their Executive MBA at Simon Fraser University. This loan offers a budget range of $30,000 to $70,000, providing financial access without the burden of interest or annual fees. Our product aims to empower students to focus on their studies and career advancement.",
+    "features": [
+      "0% interest rate for the entire loan term",
+      "No annual fees or hidden charges",
+      "Flexible repayment options post-graduation"
+    ],
+    "benefits": [
+      "Financial support tailored specifically for Executive MBA students",
+      "Peace of mind with no interest accumulation",
+      "Budget-friendly with no annual fees"
+    ],
+    "terms": {
+      "interestRate": "0.00% APR",
+      "minimumAmount": "$30,000",
+      "maximumAmount": "$70,000",
+      "termLength": "5-10 years",
+      "fees": "No annual fees; no origination fees",
+      "eligibilityRequirements": "Enrolled in the Executive MBA program at Simon Fraser University; proof of enrollment and satisfactory academic progress required"
+    },
+    "targetAudience": {
+      "primaryMarket": "Executive MBA students at Simon Fraser University",
+      "creditScoreRange": "650-850",
+      "incomeRequirement": "No minimum income requirement during study",
+      "demographics": "Ages 25-45, located in British Columbia, Canada"
+    },
+    "competitiveAdvantages": [
+      "0% interest rate throughout the loan term",
+      "Specifically designed for Executive MBA students, ensuring tailored support"
+    ],
+    "marketingCopy": {
+      "headline": "Invest in Your Future with 0% Interest",
+      "subheadline": "Tailored Financial Support for Executive MBA Students",
+      "callToAction": "Apply Now to Secure Your Educational Funding"
+    },
+    "riskAssessment": {
+      "riskLevel": "Medium",
+      "mitigationStrategies": [
+        "Strict eligibility criteria focusing on academic progress",
+        "Partnership with to monitor student status and progress"
+      ]
+    },
+    "regulatoryCompliance": [
+      "Complies with the Canadian Consumer Protection Act",
+      "Adheres to federal student loan regulations"
+    ],
+    "launchTimeline": "Q1 2024",
+    "campaign": "mba_support_2024",
+    "offerCode": "MBA2024",
+    "expiryDate": "2025-12-31",
+    "metadata": {
+      "generatedAt": "2025-07-19T00:51:09.755Z",
+      "generatedBy": "OpenAI GPT-4",
+      "version": "1.0",
+      "status": "draft"
+    },
+    "createdAt": "2025-07-19T00:51:09.756Z",
+    "updatedAt": "2025-07-19T00:51:09.756Z",
+    "status": "active"
+  },
+  {
+    "id": "customer_millenial_minivan_loan_2024",
+    "name": "🏦 Customer Bank Millennial Family Van Loan",
+    "type": "auto_loan",
+    "description": "Affordable loan solution for millennials purchasing family minivans.",
+    "detailedDescription": "The 🏦 Customer Bank Millennial Family Van Loan offers a budget-friendly financing option for well-employed millennials looking to purchase a family minivan. With competitive interest rates and flexible terms, this loan caters to individuals with strong credit profiles, providing an ideal solution for young families seeking reliable transportation.",
+    "features": [
+      "Competitive low interest rates starting at 3.49% APR",
+      "Flexible repayment terms ranging from 3 to 7 years",
+      "No prepayment penalties"
+    ],
+    "benefits": [
+      "Affordable monthly payments for budget-conscious families",
+      "Streamlined application process with quick approvals",
+      "Option to defer the first payment for up to 60 days"
+    ],
+    "terms": {
+      "interestRate": "3.49% - 5.99% APR",
+      "minimumAmount": "$30,000",
+      "maximumAmount": "$70,000",
+      "termLength": "3-7 years",
+      "fees": "Origination fee of 1% of the loan amount; late payment fee of $25",
+      "eligibilityRequirements": "Minimum credit score of 700, stable employment with a minimum annual income of $50,000, and a debt-to-income ratio below 40%"
+    },
+    "targetAudience": {
+      "primaryMarket": "Millennials aged 25-40 with young families looking for practical and affordable transportation options.",
+      "creditScoreRange": "700-850",
+      "incomeRequirement": "$50,000+",
+      "demographics": "Age 25-40, urban and suburban areas, family-oriented"
+    },
+    "competitiveAdvantages": [
+      "Lower interest rates compared to similar products in the market",
+      "Flexible terms tailored to young families' financial needs"
+    ],
+    "marketingCopy": {
+      "headline": "Drive Your Family Forward with Our Low-Rate Minivan Loan!",
+      "subheadline": "Flexible, affordable, and designed for the modern family.",
+      "callToAction": "Apply Now and Hit the Road!"
+    },
+    "riskAssessment": {
+      "riskLevel": "Low",
+      "mitigationStrategies": [
+        "Rigorous credit evaluation process",
+        "Requirement of comprehensive insurance on the vehicle"
+      ]
+    },
+    "regulatoryCompliance": [
+      "Truth in Lending Act (TILA)",
+      "Equal Credit Opportunity Act (ECOA)"
+    ],
+    "launchTimeline": "Q1 2024",
+    "campaign": "FamilyVanDrive2024",
+    "offerCode": "MINIVAN2024",
+    "expiryDate": "2024-12-31",
+    "metadata": {
+      "generatedAt": "2025-07-19T18:27:25.688Z",
+      "generatedBy": "OpenAI GPT-4",
+      "version": "1.0",
+      "status": "draft"
+    },
+    "createdAt": "2025-07-19T18:27:25.688Z",
+    "updatedAt": "2025-07-19T18:27:25.688Z",
+    "status": "active"
+  },
+  {
+    "id": "customer_young_pro_kiwi_card_001",
+    "name": "🏦 Customer Bank Kiwi Young Professional Credit Card",
+    "type": "credit-card",
+    "description": "A credit card tailored for young Kiwis, offering exclusive benefits and flexibility for professionals starting their financial journey.",
+    "detailedDescription": "The 🏦 Customer Bank Kiwi Young Professional Credit Card is designed to cater to the unique needs of young New Zealand professionals. This card offers competitive interest rates, low fees, and exclusive rewards tailored to your lifestyle. Enjoy the convenience of managing your expenses while earning points on every purchase, all with the backing of 🏦 Customer Bank's trusted financial expertise.",
+    "features": [
+      "0% introductory APR on purchases for the first 6 months",
+      "Earn 2x points on dining and travel expenses",
+      "Contactless payment feature for fast and secure transactions"
+    ],
+    "benefits": [
+      "No annual fee for the first year",
+      "Access to exclusive events and experiences in New Zealand",
+      "Complimentary travel insurance for trips booked using the card"
+    ],
+    "terms": {
+      "interestRate": "14.99% APR",
+      "minimumAmount": "$500",
+      "maximumAmount": "$20,000",
+      "termLength": "Revolving credit",
+      "fees": "Annual fee of $50 after the first year, 3% foreign transaction fee",
+      "eligibilityRequirements": "Must be a New Zealand citizen or permanent resident, minimum age of 21, employed with proof of income"
+    },
+    "targetAudience": {
+      "primaryMarket": "Young professionals born in New Zealand seeking to build and manage credit",
+      "creditScoreRange": "600-799",
+      "incomeRequirement": "$30,000+",
+      "demographics": "Aged 21-35, residing in New Zealand"
+    },
+    "competitiveAdvantages": [
+      "Tailored rewards program for dining and travel",
+      "Low-interest rates compared to market averages for the demographic"
+    ],
+    "marketingCopy": {
+      "headline": "Empower Your Financial Future with 🏦 Customer Bank",
+      "subheadline": "Start your journey with a card that understands your needs.",
+      "callToAction": "Apply Now and Start Earning Rewards!"
+    },
+    "riskAssessment": {
+      "riskLevel": "Medium",
+      "mitigationStrategies": [
+        "Regular credit limit reviews to prevent overextension",
+        "Financial literacy resources for cardholders"
+      ]
+    },
+    "regulatoryCompliance": [
+      "Complies with New Zealand Credit Contracts and Consumer Finance Act",
+      "Adheres to AML/CFT regulations"
+    ],
+    "launchTimeline": "Q1 2024",
+    "campaign": "Kiwi_Young_Pro_Launch_2024",
+    "offerCode": "KIWIPRO2024",
+    "expiryDate": "2024-12-31",
+    "metadata": {
+      "generatedAt": "2025-07-23T00:55:16.110Z",
+      "generatedBy": "OpenAI GPT-4",
+      "version": "1.0",
+      "status": "draft"
+    },
+    "createdAt": "2025-07-23T00:55:16.110Z",
+    "updatedAt": "2025-07-23T00:55:16.110Z",
+    "status": "active"
+  }
+]

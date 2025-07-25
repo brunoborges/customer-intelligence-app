@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏦 Customer Bank - Customer Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .controls-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .toggle-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .toggle-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .customers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .customer-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .customer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .customer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .customer-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .customer-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .customer-id {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .customer-details {
+            display: grid;
+            gap: 12px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .customer-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #e1e5e9;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .table-view {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .customer-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .customer-table th,
+        .customer-table td {
+            padding: 15px 12px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .customer-table th {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .customer-table tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .stats-summary {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 15px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .loading, .error {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .error {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .customers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+
+        .modal-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .modal-id {
+            text-align: center;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .profile-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-details {
+            display: grid;
+            gap: 15px;
+        }
+
+        .profile-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .profile-label {
+            font-weight: 500;
+            color: #666;
+            font-size: 0.9rem;
+            min-width: 100px;
+        }
+
+        .profile-value {
+            color: #333;
+            font-weight: 500;
+            flex: 1;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .profile-text {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin-top: 15px;
+        }
+
+        .profile-text-content {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .modal-actions {
+            padding: 20px 30px 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .modal-btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #e1e5e9;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to { 
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>👥 Customer Management</h1>
+            <div class="nav-links">
+                <a href="/">Dashboard</a>
+                <a href="/customers" style="background: #667eea; color: white;">Customers</a>
+                <a href="/ai-products">Our Products</a>
+                <a href="/intelligent-matcher">Smart Matcher</a>
+                <a href="/employee-nudge">AI Tips</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="stats-summary" id="statsSummary" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalCustomers">0</div>
+                    <div class="stat-label">Total Customers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="activeCities">0</div>
+                    <div class="stat-label">Cities</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="profileTypes">0</div>
+                    <div class="stat-label">Profile Types</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="emailCount">0</div>
+                    <div class="stat-label">With Emails</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search customers by name, city, or profile..." oninput="filterCustomers()">
+            </div>
+            <div class="view-toggle">
+                <button class="toggle-btn active" id="cardViewBtn" onclick="switchView('card')">📱 Cards</button>
+                <button class="toggle-btn" id="tableViewBtn" onclick="switchView('table')">📊 Table</button>
+            </div>
+        </div>
+
+        <div id="loading" class="loading">🔄 Loading customers...</div>
+        <div id="error" class="error" style="display: none;"></div>
+
+        <!-- Card View -->
+        <div id="cardView" class="customers-grid"></div>
+
+        <!-- Table View -->
+        <div id="tableView" class="table-view">
+            <table class="customer-table" id="customerTable">
+                <thead id="tableHeader"></thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Customer Profile Modal -->
+    <div id="customerModal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <div class="modal-avatar" id="modalAvatar"></div>
+                <div class="modal-name" id="modalName"></div>
+                <div class="modal-id" id="modalId"></div>
+            </div>
+            <div class="modal-body">
+                <div class="profile-section">
+                    <div class="section-title">📋 Contact Information</div>
+                    <div class="profile-details" id="contactDetails"></div>
+                </div>
+                <div class="profile-section" id="profileSection" style="display: none;">
+                    <div class="section-title">👤 Customer Profile</div>
+                    <div class="profile-text">
+                        <div class="profile-text-content" id="profileText"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes Editing Modal -->
+    <div id="notesModal" class="modal-overlay" onclick="closeNotesModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeNotesModal()">&times;</button>
+                <div class="modal-avatar" id="notesModalAvatar"></div>
+                <div class="modal-name" id="notesModalName"></div>
+                <div class="modal-id">Edit Important Notes</div>
+            </div>
+            <div class="modal-body">
+                <div class="profile-section">
+                    <div class="section-title">📝 Important Notes</div>
+                    <textarea 
+                        id="notesTextarea" 
+                        placeholder="Add important notes about this customer (e.g., preferences, special requirements, previous interactions...)"
+                        style="width: 100%; min-height: 150px; padding: 15px; border: 2px solid #e1e5e9; border-radius: 10px; font-family: inherit; font-size: 0.95rem; line-height: 1.5; resize: vertical;"
+                    ></textarea>
+                    <div style="margin-top: 10px; font-size: 0.85rem; color: #666;">
+                        💡 These notes will be used by AI to better match products to this customer's specific needs and preferences.
+                    </div>
+                </div>
+                
+                <!-- Promotional Nudge Option -->
+                <div class="profile-section" style="margin-top: 20px;">
+                    <div class="section-title">🎯 AI-Powered Promotional Nudges</div>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                        <input type="checkbox" id="triggerNudgeCheckbox" style="transform: scale(1.2);">
+                        <label for="triggerNudgeCheckbox" style="font-size: 0.95rem; font-weight: 500; color: #333; cursor: pointer;">
+                            Trigger Relevant Promotional Nudges
+                        </label>
+                    </div>
+                    <div style="margin-top: 8px; font-size: 0.85rem; color: #666; margin-left: 30px;">
+                        ✨ When enabled, the AI will automatically match the best financial product for this customer and send a personalized promotional email.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-primary" id="saveNotesBtn" onclick="saveNotes()">
+                    💾 Save Notes
+                </button>
+                <button class="modal-btn modal-btn-secondary" onclick="closeNotesModal()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allCustomers = [];
+        let currentView = 'card';
+
+        // Load authentication button
+        async function loadAuthButton() {
+            try {
+                const response = await fetch('/api/auth-status');
+                const authStatus = await response.json();
+                const authButtonContainer = document.getElementById('authButton');
+                
+                if (authStatus.authenticated) {
+                    authButtonContainer.innerHTML = `
+                        <form action="/logout" method="POST" style="display: inline;">
+                            <button type="submit" class="logout-button">👋 Logout</button>
+                        </form>
+                    `;
+                } else {
+                    authButtonContainer.innerHTML = `
+                        <a href="/login" style="text-decoration: none;">
+                            <button class="logout-button">🔑 Login</button>
+                        </a>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading auth status:', error);
+                // Default to login button if error
+                document.getElementById('authButton').innerHTML = `
+                    <a href="/login" style="text-decoration: none;">
+                        <button class="logout-button">🔑 Login</button>
+                    </a>
+                `;
+            }
+        }
+
+        async function loadCustomers() {
+            try {
+                const response = await fetch('/api/customers');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                allCustomers = await response.json();
+                
+                document.getElementById('loading').style.display = 'none';
+                
+                if (allCustomers.length === 0) {
+                    document.getElementById('error').textContent = 'No customers found.';
+                    document.getElementById('error').style.display = 'block';
+                    return;
+                }
+
+                updateStats();
+                displayCustomers(allCustomers);
+                document.getElementById('statsSummary').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading customers:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').textContent = 'Failed to load customer data. Please try again.';
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        function updateStats() {
+            const totalCustomers = allCustomers.length;
+            const uniqueCities = new Set(allCustomers.map(c => c.city).filter(Boolean)).size;
+            const uniqueProfiles = new Set(allCustomers.map(c => c.profile).filter(Boolean)).size;
+            const withEmails = allCustomers.filter(c => c.email).length;
+
+            document.getElementById('totalCustomers').textContent = totalCustomers;
+            document.getElementById('activeCities').textContent = uniqueCities;
+            document.getElementById('profileTypes').textContent = uniqueProfiles;
+            document.getElementById('emailCount').textContent = withEmails;
+        }
+
+        function getInitials(firstName, lastName) {
+            const first = firstName ? firstName.charAt(0).toUpperCase() : '';
+            const last = lastName ? lastName.charAt(0).toUpperCase() : '';
+            return first + last || '?';
+        }
+
+        function createCustomerCard(customer, originalIndex) {
+            const initials = getInitials(customer.first_name, customer.last_name);
+            const fullName = `${customer.first_name || ''} ${customer.last_name || ''}`.trim() || 'Unknown';
+            
+            // Create a unique identifier for this customer
+            const customerId = `${customer.first_name}_${customer.last_name}_${customer.email || originalIndex}`;
+            
+            return `
+                <div class="customer-card">
+                    <div class="customer-header">
+                        <div class="customer-avatar">${initials}</div>
+                        <div>
+                            <div class="customer-name">${fullName}</div>
+                            <div class="customer-id">ID: ${customer.id || originalIndex + 1}</div>
+                        </div>
+                    </div>
+                    <div class="customer-details">
+                        ${customer.email ? `
+                        <div class="detail-row">
+                            <span class="detail-label">📧 Email</span>
+                            <span class="detail-value">${customer.email}</span>
+                        </div>` : ''}
+                        ${customer.city ? `
+                        <div class="detail-row">
+                            <span class="detail-label">🏙️ City</span>
+                            <span class="detail-value">${customer.city}</span>
+                        </div>` : ''}
+                        ${customer.phone ? `
+                        <div class="detail-row">
+                            <span class="detail-label">📱 Phone</span>
+                            <span class="detail-value">${customer.phone}</span>
+                        </div>` : ''}
+                        ${customer.age ? `
+                        <div class="detail-row">
+                            <span class="detail-label">🎂 Age</span>
+                            <span class="detail-value">${customer.age}</span>
+                        </div>` : ''}
+                    </div>
+                    <div class="customer-actions">
+                        <button class="action-btn btn-primary" onclick="viewProfileByCustomer('${customerId}', ${originalIndex})">View Profile</button>
+                        <button class="action-btn btn-secondary" onclick="editNotes(${originalIndex})">📝 Edit Notes</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayCustomers(customers) {
+            if (currentView === 'card') {
+                displayCardView(customers);
+            } else {
+                displayTableView(customers);
+            }
+        }
+
+        function displayCardView(customers) {
+            const cardView = document.getElementById('cardView');
+            cardView.innerHTML = customers.map((customer, filteredIndex) => {
+                // Find the original index in allCustomers array
+                const originalIndex = allCustomers.findIndex(c => 
+                    c.first_name === customer.first_name && 
+                    c.last_name === customer.last_name && 
+                    c.email === customer.email
+                );
+                return createCustomerCard(customer, originalIndex);
+            }).join('');
+        }
+
+        function displayTableView(customers) {
+            if (customers.length === 0) return;
+
+            const headers = Object.keys(customers[0]);
+            const headerRow = document.getElementById('tableHeader');
+            headerRow.innerHTML = '';
+            
+            const headerRowElement = document.createElement('tr');
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header.replace('_', ' ').toUpperCase();
+                headerRowElement.appendChild(th);
+            });
+            headerRow.appendChild(headerRowElement);
+            
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            customers.forEach(customer => {
+                const row = document.createElement('tr');
+                headers.forEach(header => {
+                    const td = document.createElement('td');
+                    td.textContent = customer[header] || '-';
+                    row.appendChild(td);
+                });
+                tbody.appendChild(row);
+            });
+        }
+
+        function switchView(view) {
+            currentView = view;
+            
+            // Update button states
+            document.getElementById('cardViewBtn').classList.toggle('active', view === 'card');
+            document.getElementById('tableViewBtn').classList.toggle('active', view === 'table');
+            
+            // Show/hide views
+            document.getElementById('cardView').style.display = view === 'card' ? 'grid' : 'none';
+            document.getElementById('tableView').style.display = view === 'table' ? 'block' : 'none';
+            
+            // Redisplay customers in new view
+            const filteredCustomers = filterCurrentCustomers();
+            displayCustomers(filteredCustomers);
+        }
+
+        function filterCustomers() {
+            const filteredCustomers = filterCurrentCustomers();
+            displayCustomers(filteredCustomers);
+        }
+
+        function filterCurrentCustomers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (!searchTerm) {
+                return allCustomers;
+            }
+            
+            return allCustomers.filter(customer => {
+                const searchFields = [
+                    customer.first_name,
+                    customer.last_name,
+                    customer.email,
+                    customer.city,
+                    customer.profile
+                ].filter(Boolean);
+                
+                return searchFields.some(field => 
+                    field.toLowerCase().includes(searchTerm)
+                );
+            });
+        }
+
+        function viewProfile(index) {
+            const customer = allCustomers[index];
+            showCustomerModal(customer, index);
+        }
+
+        function viewProfileByCustomer(customerId, originalIndex) {
+            const customer = allCustomers[originalIndex];
+            showCustomerModal(customer, originalIndex);
+        }
+
+        function showCustomerModal(customer, index) {
+            const initials = getInitials(customer.first_name, customer.last_name);
+            const fullName = `${customer.first_name || ''} ${customer.last_name || ''}`.trim() || 'Unknown';
+            
+            // Set modal header
+            document.getElementById('modalAvatar').textContent = initials;
+            document.getElementById('modalName').textContent = fullName;
+            document.getElementById('modalId').textContent = `Customer ID: ${customer.id || index + 1}`;
+            
+            // Build contact details
+            const contactDetails = [];
+            if (customer.email) contactDetails.push({ label: '📧 Email', value: customer.email });
+            if (customer.phone) contactDetails.push({ label: '📱 Phone', value: customer.phone });
+            if (customer.city) contactDetails.push({ label: '🏙️ City', value: customer.city });
+            if (customer.age) contactDetails.push({ label: '🎂 Age', value: customer.age });
+            
+            // Add any other fields except profile
+            Object.entries(customer).forEach(([key, value]) => {
+                if (value && !['first_name', 'last_name', 'email', 'phone', 'city', 'age', 'profile', 'id'].includes(key)) {
+                    const label = key.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    contactDetails.push({ label: `📋 ${label}`, value: value });
+                }
+            });
+            
+            const contactDetailsHtml = contactDetails.map(detail => `
+                <div class="profile-row">
+                    <span class="profile-label">${detail.label}</span>
+                    <span class="profile-value">${detail.value}</span>
+                </div>
+            `).join('');
+            
+            document.getElementById('contactDetails').innerHTML = contactDetailsHtml;
+            
+            // Handle profile text
+            const profileSection = document.getElementById('profileSection');
+            const profileText = document.getElementById('profileText');
+            
+            if (customer.profile && customer.profile.trim()) {
+                profileText.textContent = customer.profile;
+                profileSection.style.display = 'block';
+            } else {
+                profileSection.style.display = 'none';
+            }
+            
+            // Add notes section if notes exist
+            let notesHtml = '';
+            if (customer.notes && customer.notes.trim()) {
+                notesHtml = `
+                    <div class="profile-section">
+                        <div class="section-title">📝 Important Notes</div>
+                        <div class="profile-text">
+                            <div class="profile-text-content">${customer.notes}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Insert notes section after contact details
+            const contactSection = document.getElementById('contactDetails').parentElement;
+            
+            // Remove any existing notes section
+            const existingNotesSection = contactSection.parentElement.querySelector('.notes-section');
+            if (existingNotesSection) {
+                existingNotesSection.remove();
+            }
+            
+            if (notesHtml) {
+                const notesDiv = document.createElement('div');
+                notesDiv.className = 'notes-section';
+                notesDiv.innerHTML = notesHtml;
+                contactSection.parentElement.insertBefore(notesDiv, profileSection);
+            }
+            
+            // Store customer index for potential future use
+            // document.getElementById('modalSendEmail').setAttribute('data-customer-index', index);
+            
+            // Show modal
+            document.getElementById('customerModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent body scroll
+        }
+
+        function closeModal(event) {
+            // Close only if clicking overlay or close button
+            if (!event || event.target.classList.contains('modal-overlay') || event.target.classList.contains('modal-close')) {
+                document.getElementById('customerModal').style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore body scroll
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+                closeNotesModal();
+            }
+        });
+
+        // Notes editing functionality
+        let currentEditingCustomerIndex = -1;
+
+        function editNotes(index) {
+            currentEditingCustomerIndex = index;
+            const customer = allCustomers[index];
+            
+            const initials = getInitials(customer.first_name, customer.last_name);
+            const fullName = `${customer.first_name || ''} ${customer.last_name || ''}`.trim() || 'Unknown';
+            
+            // Set modal header
+            document.getElementById('notesModalAvatar').textContent = initials;
+            document.getElementById('notesModalName').textContent = fullName;
+            
+            // Set current notes
+            document.getElementById('notesTextarea').value = customer.notes || '';
+            
+            // Reset promotional nudge checkbox
+            document.getElementById('triggerNudgeCheckbox').checked = false;
+            
+            // Show modal
+            document.getElementById('notesModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Focus on textarea
+            setTimeout(() => {
+                document.getElementById('notesTextarea').focus();
+            }, 100);
+        }
+
+        function closeNotesModal(event) {
+            // Close only if clicking overlay or close button
+            if (!event || event.target.classList.contains('modal-overlay') || event.target.classList.contains('modal-close')) {
+                document.getElementById('notesModal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+                currentEditingCustomerIndex = -1;
+            }
+        }
+
+        async function triggerPromotionalNudge(customer) {
+            try {
+                console.log('🎯 Triggering promotional nudge for customer:', customer.first_name, customer.last_name);
+                
+                // Step 1: Get available products
+                const productsResponse = await fetch('/api/products');
+                if (!productsResponse.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+                const productsData = await productsResponse.json();
+                const products = productsData.products || [];
+                
+                if (products.length === 0) {
+                    throw new Error('No products available for matching');
+                }
+                
+                console.log('📦 Found', products.length, 'products for matching');
+                
+                // Step 2: Run AI Product Matcher
+                const matchResponse = await fetch('/api/ai/match-products', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        customers: [customer],
+                        products: products
+                    })
+                });
+                
+                if (!matchResponse.ok) {
+                    throw new Error('Failed to run AI product matching');
+                }
+                
+                const matchData = await matchResponse.json();
+                console.log('🤖 AI matching result:', matchData);
+                
+                if (!matchData.success || !matchData.matches || matchData.matches.length === 0) {
+                    throw new Error('AI matching failed or no matches found');
+                }
+                
+                const match = matchData.matches[0];
+                if (!match.success) {
+                    throw new Error('AI matching failed for customer: ' + (match.error || 'Unknown error'));
+                }
+                
+                console.log('✅ Best product match:', match.recommendation.recommendedProduct.productName);
+                
+                // Step 3: Send promotional email
+                const emailResponse = await fetch('/api/ai/send-individual-emails', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        matches: [match]
+                    })
+                });
+                
+                if (!emailResponse.ok) {
+                    throw new Error('Failed to send promotional email');
+                }
+                
+                const emailData = await emailResponse.json();
+                console.log('📧 Email sending result:', emailData);
+                
+                if (!emailData.success) {
+                    throw new Error('Email sending failed: ' + (emailData.error || 'Unknown error'));
+                }
+                
+                const emailResults = emailData.emailResults || [];
+                const successfulEmails = emailResults.filter(r => r.success);
+                
+                if (successfulEmails.length === 0) {
+                    throw new Error('No emails were sent successfully');
+                }
+                
+                console.log('🎉 Promotional nudge completed successfully!');
+                console.log('📧 Email sent for product:', successfulEmails[0].productMatched);
+                
+                return {
+                    success: true,
+                    productMatched: match.recommendation.recommendedProduct.productName,
+                    emailSent: true
+                };
+                
+            } catch (error) {
+                console.error('❌ Error in promotional nudge:', error);
+                throw error;
+            }
+        }
+
+        async function saveNotes() {
+            if (currentEditingCustomerIndex === -1) return;
+            
+            const customer = allCustomers[currentEditingCustomerIndex];
+            const notes = document.getElementById('notesTextarea').value.trim();
+            const triggerNudge = document.getElementById('triggerNudgeCheckbox').checked;
+            
+            const saveBtn = document.getElementById('saveNotesBtn');
+            const originalText = saveBtn.textContent;
+            
+            try {
+                saveBtn.textContent = '💾 Saving...';
+                saveBtn.disabled = true;
+                
+                // Send update to server
+                const response = await fetch('/api/customers/update-notes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        customerEmail: customer.email,
+                        customerId: customer.id,
+                        customerName: `${customer.first_name} ${customer.last_name}`,
+                        notes: notes
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Update local data
+                    allCustomers[currentEditingCustomerIndex].notes = notes;
+                    
+                    // Handle promotional nudge if checked
+                    if (triggerNudge) {
+                        saveBtn.textContent = '🤖 Triggering AI Nudge...';
+                        await triggerPromotionalNudge(customer);
+                    }
+                    
+                    // Close modal
+                    closeNotesModal();
+                    
+                    // Show success message
+                    const message = triggerNudge ? 
+                        'Notes saved and promotional nudge triggered successfully!' : 
+                        'Notes saved successfully!';
+                    alert(message);
+                    
+                    // Refresh the display
+                    const filteredCustomers = filterCurrentCustomers();
+                    displayCustomers(filteredCustomers);
+                } else {
+                    throw new Error(result.error || 'Failed to save notes');
+                }
+                
+            } catch (error) {
+                console.error('Error saving notes:', error);
+                alert('Failed to save notes. Please try again.');
+            } finally {
+                saveBtn.textContent = originalText;
+                saveBtn.disabled = false;
+            }
+        }
+
+        // Load customers when page loads
+        loadAuthButton();
+        loadCustomers();
+    </script>
+</body>
+</html>

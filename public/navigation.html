@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏦 Customer Bank - AI Marketing Suite</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 3rem;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            margin: 15px 0 0 0;
+            color: #666;
+            font-size: 1.3rem;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .tool-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tool-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .tool-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .tool-features li {
+            padding: 5px 0;
+            color: #28a745;
+            font-size: 0.9rem;
+        }
+        
+        .tool-features li::before {
+            content: "✓ ";
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏦 Customer Bank</h1>
+            <p>AI-Powered Marketing & Product Management Suite</p>
+        </div>
+        
+        <div class="tools-grid">
+            <a href="/intelligent-matcher" class="tool-card">
+                <div class="tool-icon">🤖</div>
+                <div class="tool-title">Intelligent Product Matcher</div>
+                <div class="tool-description">
+                    Advanced AI-powered system that matches customers with optimal financial products and sends personalized email campaigns.
+                </div>
+                <ul class="tool-features">
+                    <li>OpenAI-powered customer analysis</li>
+                    <li>Smart product recommendations</li>
+                    <li>Automated email campaigns via Resend</li>
+                    <li>Real-time progress tracking</li>
+                </ul>
+            </a>
+            
+            <a href="/ai-products" class="tool-card">
+                <div class="tool-icon">🧠</div>
+                <div class="tool-title">AI Product Manager</div>
+                <div class="tool-description">
+                    Generate, analyze, and manage financial products using OpenAI's GPT-4. Create innovative products with AI-powered insights.
+                </div>
+                <ul class="tool-features">
+                    <li>AI product generation</li>
+                    <li>Portfolio analysis</li>
+                    <li>Marketing copy generation</li>
+                    <li>Product lifecycle management</li>
+                </ul>
+            </a>
+            
+            <a href="/email-generator" class="tool-card">
+                <div class="tool-icon">📧</div>
+                <div class="tool-title">Email Generator</div>
+                <div class="tool-description">
+                    Create personalized email campaigns for financial products with professional templates and dynamic content generation.
+                </div>
+                <ul class="tool-features">
+                    <li>Responsive email templates</li>
+                    <li>Dynamic content insertion</li>
+                    <li>Bulk email generation</li>
+                    <li>Professional design</li>
+                </ul>
+            </a>
+            
+            <a href="/api/email-template" class="tool-card">
+                <div class="tool-icon">🎨</div>
+                <div class="tool-title">Email Template Preview</div>
+                <div class="tool-description">
+                    Preview and customize the professional email template used across all marketing campaigns.
+                </div>
+                <ul class="tool-features">
+                    <li>Live template preview</li>
+                    <li>Responsive design</li>
+                    <li>🏦 Customer Bank branding</li>
+                    <li>Mobile optimization</li>
+                </ul>
+            </a>
+        </div>
+        
+        <div class="stats-section">
+            <h2 style="color: #1e3c72; margin-bottom: 20px;">Platform Capabilities</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">AI</div>
+                    <div class="stat-label">OpenAI GPT-4 Integration</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">📧</div>
+                    <div class="stat-label">Resend Email API</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">🎯</div>
+                    <div class="stat-label">Smart Matching</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">⚡</div>
+                    <div class="stat-label">Real-time Processing</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🏦 Customer Bank AI Marketing Suite - Powered by OpenAI GPT-4 & Resend</p>
+            <p>Advanced customer-product matching and automated email marketing</p>
+        </div>
+    </div>
+</body>
+</html>

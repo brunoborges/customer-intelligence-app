@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏦 Customer Bank - Customer Intelligence Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            position: relative;
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .logout-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .feature-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: #e8f5e8;
+            color: #4caf50;
+        }
+
+        .status-beta {
+            background: #fff3e0;
+            color: #ff9800;
+        }
+
+        .status-new {
+            background: #e3f2fd;
+            color: #2196f3;
+        }
+
+        .quick-actions {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .quick-actions h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .action-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #e1e5e9;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .ai-badge {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Sales Quota Widget */
+        .quota-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 320px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: 2px solid #e1e5e9;
+            z-index: 1000;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .quota-widget:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+
+        .quota-header {
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quota-progress-container {
+            padding: 16px;
+            background: white;
+        }
+
+        .quota-progress-bar {
+            position: relative;
+            height: 20px;
+            background: #f1f3f4;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .quota-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4757 0%, #ff6b6b 50%, #ffa502 100%);
+            border-radius: 10px;
+            transition: all 1s ease;
+            position: relative;
+        }
+
+        .quota-progress-fill.high {
+            background: linear-gradient(90deg, #2ed573 0%, #7bed9f 50%, #70a1ff 100%);
+        }
+
+        .quota-progress-fill.danger {
+            background: linear-gradient(90deg, #ff4757 0%, #ff3838 50%, #ff2f2f 100%);
+            animation: pulse-danger 1.5s infinite;
+        }
+
+        @keyframes pulse-danger {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .quota-progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            font-size: 0.75rem;
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .quota-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .quota-current {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .quota-target {
+            color: #28a745;
+        }
+
+        .quota-tip {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .quota-tip-text {
+            color: #495057;
+            margin-bottom: 8px;
+        }
+
+        .quota-cta {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .quota-cta:hover {
+            background: linear-gradient(135deg, #20c997 0%, #28a745 100%);
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .quota-widget {
+                width: 280px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .quota-header {
+                padding: 10px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .quota-progress-container {
+                padding: 12px;
+            }
+            
+            .quota-details {
+                font-size: 0.7rem;
+            }
+
+            .quota-tip {
+                padding: 10px;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Pulsing hint animation */
+        .quota-thermometer::before {
+            content: '💡';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            animation: pulse-hint 3s infinite;
+            z-index: 1002;
+        }
+
+        @keyframes pulse-hint {
+            0%, 70%, 100% { opacity: 0.7; transform: scale(1); }
+            15%, 55% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Progress indicators */
+        .quota-progress-marks {
+            position: absolute;
+            top: 0;
+            left: -10px;
+            right: -10px;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .progress-mark {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .progress-mark::before {
+            content: attr(data-label);
+            position: absolute;
+            right: 100%;
+            top: -6px;
+            font-size: 0.6rem;
+            color: #666;
+            margin-right: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .quota-thermometer {
+                width: 100px;
+                height: 250px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .thermometer-body {
+                height: 140px;
+                margin: 10px 20px 15px;
+            }
+            
+            .thermometer-header {
+                padding: 10px 8px 8px;
+                font-size: 0.7rem;
+            }
+            
+            .quota-details {
+                padding: 8px;
+                font-size: 0.65rem;
+            }
+
+            .quota-tooltip {
+                right: -80px;
+                width: 260px;
+                white-space: normal;
+                text-align: center;
+                font-size: 0.8rem;
+                padding: 12px 15px;
+            }
+            
+            .quota-tooltip::after {
+                right: 50%;
+                transform: translateX(50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <div id="authButton">
+                <!-- This will be dynamically populated -->
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px;">
+                <div style="font-size: 60px;">🏦</div>
+                <h1 style="margin: 0;">🏦 Customer Bank Customer Intelligence Dashboard</h1>
+            </div>
+            <p>AI-Powered Customer Management & Product Matching Platform</p>
+        </div>
+
+        <div class="stats-row" id="statsRow">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number" id="customerCount">-</div>
+                <div class="stat-label">Total Customers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-number" id="productCount">-</div>
+                <div class="stat-label">Available Products</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📧</div>
+                <div class="stat-number" id="emailCount">-</div>
+                <div class="stat-label">Emails Sent Today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🤖</div>
+                <div class="stat-number" id="aiMatches">-</div>
+                <div class="stat-label">AI Matches Made</div>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <a href="/intelligent-matcher" class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <div class="feature-title">
+                    Intelligent Product Matcher
+                    <span class="ai-badge">AI</span>
+                </div>
+                <div class="feature-description">
+                    Advanced AI-powered customer-to-product matching using OpenAI GPT-4. Automatically analyze customer profiles and recommend the best financial products with personalized email campaigns.
+                </div>
+                <span class="feature-status status-active">Active</span>
+            </a>
+
+            <a href="/customers" class="feature-card">
+                <div class="feature-icon">👥</div>
+                <div class="feature-title">Customer Management</div>
+                <div class="feature-description">
+                    View and manage your complete customer database. Browse customer profiles, demographics, and interaction history in an organized table format.
+                </div>
+                <span class="feature-status status-active">Active</span>
+            </a>
+
+            <a href="/ai-products" class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">
+                    Product Portfolio
+                    <span class="ai-badge">AI</span>
+                </div>
+                <div class="feature-description">
+                    Manage your financial product catalog with AI-enhanced descriptions and targeting parameters. Configure products for intelligent matching algorithms.
+                </div>
+                <span class="feature-status status-active">Active</span>
+            </a>
+
+            <a href="/employee-nudge" class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <div class="feature-title">
+                    Employee AI Nudge
+                    <span class="ai-badge">AI</span>
+                </div>
+                <div class="feature-description">
+                    Send personalized AI-generated tips and tricks to employees. Help build a Digital AI Mindset with daily productivity tips, automation suggestions, and AI adoption strategies.
+                </div>
+                <span class="feature-status status-active">Active</span>
+            </a>
+
+            <a href="#" class="feature-card">
+                <div class="feature-icon">📋</div>
+                <div class="feature-title">Email Template Engine</div>
+                <div class="feature-description">
+                    Design and preview professional email templates with dynamic content. Create responsive templates for various marketing campaigns and communications.
+                </div>
+                <span class="feature-status status-new">Coming Soon</span>
+            </a>
+
+            <a href="#" class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Analytics Dashboard</div>
+                <div class="feature-description">
+                    Comprehensive analytics and reporting for customer engagement, email performance, and product matching success rates. Data-driven insights for better decision making.
+                </div>
+                <span class="feature-status status-new">Coming Soon</span>
+            </a>
+        </div>
+
+        <div class="quick-actions">
+            <h3>🚀 Quick Actions</h3>
+            <div class="action-buttons">
+                <a href="/intelligent-matcher" class="action-btn btn-primary">Start AI Matching</a>
+                <a href="/employee-nudge" class="action-btn btn-primary">Send AI Tips</a>
+                <a href="/customers" class="action-btn btn-secondary">View Customers</a>
+                <a href="/ai-products" class="action-btn btn-secondary">Manage Products</a>
+                <button class="action-btn btn-success" onclick="runHealthCheck()">System Health Check</button>
+                <button class="action-btn btn-secondary" onclick="exportData()">Export Data</button>
+                <button class="action-btn btn-secondary" onclick="viewLogs()">View Logs</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 🏦 Customer Bank Customer Intelligence Platform | Powered by OpenAI GPT-4 & Resend</p>
+            <p>Version 2.0 | Last updated: <span id="lastUpdated">-</span></p>
+        </div>
+    </div>
+
+    <!-- Sales Quota Widget -->
+    <div class="quota-widget">
+        <div class="quota-header">
+            <span>📊 Monthly Sales Bonus</span>
+            <span id="quotaPercentage">0%</span>
+        </div>
+        <div class="quota-progress-container">
+            <div class="quota-progress-bar">
+                <div class="quota-progress-fill" id="quotaProgressFill"></div>
+                <div class="quota-progress-text" id="quotaProgressText">0%</div>
+            </div>
+            <div class="quota-details">
+                <div>Current: $<span class="quota-current" id="quotaCurrent">0</span></div>
+                <div>Target: $<span class="quota-target" id="quotaTarget">50,000</span></div>
+                <div><span id="quotaDaysLeft">30</span> days left</div>
+            </div>
+            <div class="quota-tip">
+                <div class="quota-tip-text" id="quotaTipText">
+                    💡 AI Product Matching can increase your sales bonus by 3x! Start matching customers to boost your bonus.
+                </div>
+                <a href="/intelligent-matcher" class="quota-cta" id="quotaCTA">
+                    🚀 Use AI Product Matcher
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dashboard initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAuthButton();
+            loadDashboardStats();
+            updateLastUpdated();
+            initQuotaWidget();
+        });
+
+        // Initialize and animate quota widget
+        function initQuotaWidget() {
+            // Simulate quota data (in a real app, this would come from your database)
+            const quotaData = generateQuotaData();
+            updateQuotaDisplay(quotaData);
+            
+            // Update widget every 5 minutes to simulate real-time changes
+            setInterval(() => {
+                const updatedQuota = generateQuotaData();
+                updateQuotaDisplay(updatedQuota);
+            }, 300000); // 5 minutes
+        }
+
+        function generateQuotaData() {
+            // Simulate realistic quota progression based on time of month
+            const now = new Date();
+            const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+            const dayOfMonth = now.getDate();
+            const monthProgress = dayOfMonth / daysInMonth;
+            
+            // Base targets
+            const monthlyTarget = 50000;
+            const expectedProgress = monthProgress * 0.8; // Realistic expectation
+            const randomVariation = (Math.random() - 0.5) * 0.4; // ±20% variation
+            
+            const currentSales = Math.max(0, Math.min(monthlyTarget, 
+                monthlyTarget * (expectedProgress + randomVariation)));
+            
+            const daysLeft = daysInMonth - dayOfMonth;
+            const percentage = (currentSales / monthlyTarget) * 100;
+            
+            return {
+                current: Math.round(currentSales),
+                target: monthlyTarget,
+                percentage: Math.round(percentage),
+                daysLeft: daysLeft,
+                isOnTrack: percentage >= (monthProgress * 100 * 0.8)
+            };
+        }
+
+        function updateQuotaDisplay(data) {
+            const progressFill = document.getElementById('quotaProgressFill');
+            const percentageSpan = document.getElementById('quotaPercentage');
+            const progressText = document.getElementById('quotaProgressText');
+            const currentSpan = document.getElementById('quotaCurrent');
+            const targetSpan = document.getElementById('quotaTarget');
+            const daysLeftSpan = document.getElementById('quotaDaysLeft');
+            const tipText = document.getElementById('quotaTipText');
+            const ctaButton = document.getElementById('quotaCTA');
+            
+            // Update text content
+            percentageSpan.textContent = data.percentage + '%';
+            progressText.textContent = data.percentage + '%';
+            currentSpan.textContent = data.current.toLocaleString();
+            targetSpan.textContent = data.target.toLocaleString();
+            daysLeftSpan.textContent = data.daysLeft;
+            
+            // Animate progress bar
+            const progressWidth = Math.min(100, Math.max(2, data.percentage));
+            progressFill.style.width = progressWidth + '%';
+            
+            // Update progress bar color based on performance
+            progressFill.className = 'quota-progress-fill';
+            if (data.percentage >= 90) {
+                progressFill.classList.add('high');
+            } else if (data.percentage < 50 && data.daysLeft < 10) {
+                progressFill.classList.add('danger');
+            }
+            
+            // Update header based on status
+            const header = document.querySelector('.quota-header span:first-child');
+            if (data.percentage >= 100) {
+                header.textContent = '🎯 Bonus Achieved!';
+                header.parentElement.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+                tipText.innerHTML = '🎉 Excellent! You\'ve exceeded your monthly bonus!<br>Keep using AI to maintain momentum.';
+            } else if (data.percentage >= 80) {
+                header.textContent = '📈 On Track!';
+                header.parentElement.style.background = 'linear-gradient(135deg, #ffa502 0%, #ff6348 100%)';
+                tipText.innerHTML = `🚀 Great progress! You\'re ${100-data.percentage}% away from your bonus goal.<br>AI Matcher can help you close the gap!`;
+            } else if (data.daysLeft < 10 && data.percentage < 70) {
+                header.textContent = '⚠️ Behind Schedule!';
+                header.parentElement.style.background = 'linear-gradient(135deg, #ff4757 0%, #ff3838 100%)';
+                tipText.innerHTML = `⚡ Time is running out! Only ${data.daysLeft} days left.<br>Use AI Matcher to grow your sales bonus now!`;
+            } else {
+                header.textContent = '📊 Monthly Sales Bonus';
+                header.parentElement.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                tipText.innerHTML = `💡 AI Product Matching can increase your sales bonus by 3x!<br>Current: ${data.percentage}% | Target: 100%`;
+            }
+            
+            // Update CTA button based on performance
+            if (data.percentage >= 100) {
+                ctaButton.textContent = '🎉 Keep Going!';
+                ctaButton.style.background = 'linear-gradient(135deg, #2ed573 0%, #7bed9f 100%)';
+            } else if (data.percentage > 70) {
+                ctaButton.textContent = '🚀 ALmost there! Boost Sales Now!';
+                ctaButton.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%)';
+            } else {
+                ctaButton.textContent = '🚀 Use AI Product Matcher';
+                ctaButton.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+            }
+            
+            // Calculate remaining amount needed
+            const remaining = data.target - data.current;
+            const dailyNeeded = Math.ceil(remaining / Math.max(1, data.daysLeft));
+            
+            // Add performance insights to tip
+            if (data.percentage < 100) {
+                tipText.innerHTML += `<br><small style="opacity: 0.8;">Need: $${remaining.toLocaleString()} | $${dailyNeeded.toLocaleString()}/day</small>`;
+            }
+        }
+
+        // Track quota widget interactions
+        function trackQuotaWidgetClick() {
+            // Analytics tracking (in a real app, this would send to your analytics service)
+            console.log('🎯 Sales quota widget clicked - User navigated to AI Matcher');
+            
+            // Optional: Send to analytics endpoint
+            fetch('/api/analytics/quota-widget-click', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    timestamp: new Date().toISOString(),
+                    source: 'dashboard_quota_widget',
+                    action: 'navigate_to_ai_matcher'
+                })
+            }).catch(err => console.log('Analytics tracking failed:', err));
+        }
+
+        // Add click tracking to quota widget
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... existing initialization code ...
+            
+            // Add click tracking to CTA button
+            const ctaButton = document.getElementById('quotaCTA');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', trackQuotaWidgetClick);
+            }
+        });
+
+        // Load authentication button
+        async function loadAuthButton() {
+            try {
+                const response = await fetch('/api/auth-status');
+                const authStatus = await response.json();
+                const authButtonContainer = document.getElementById('authButton');
+                
+                if (authStatus.authenticated) {
+                    authButtonContainer.innerHTML = `
+                        <form action="/logout" method="POST" style="display: inline;">
+                            <button type="submit" class="logout-button">👋 Logout</button>
+                        </form>
+                    `;
+                } else {
+                    authButtonContainer.innerHTML = `
+                        <a href="/login" style="text-decoration: none;">
+                            <button class="logout-button">🔑 Login</button>
+                        </a>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading auth status:', error);
+                // Default to login button if error
+                document.getElementById('authButton').innerHTML = `
+                    <a href="/login" style="text-decoration: none;">
+                        <button class="logout-button">🔑 Login</button>
+                    </a>
+                `;
+            }
+        }
+
+        // Load dashboard statistics
+        async function loadDashboardStats() {
+            try {
+                // Load customer count
+                const customerResponse = await fetch('/api/customers');
+                if (customerResponse.ok) {
+                    const customers = await customerResponse.json();
+                    document.getElementById('customerCount').textContent = customers.length;
+                }
+
+                // Set other stats (these would come from your database/analytics)
+                document.getElementById('productCount').textContent = '5'; // From your products
+                document.getElementById('emailCount').textContent = '0'; // Would track daily emails
+                document.getElementById('aiMatches').textContent = '0'; // Would track AI matches
+                
+            } catch (error) {
+                console.error('Error loading dashboard stats:', error);
+                // Set fallback values
+                document.getElementById('customerCount').textContent = '?';
+                document.getElementById('productCount').textContent = '?';
+                document.getElementById('emailCount').textContent = '?';
+                document.getElementById('aiMatches').textContent = '?';
+            }
+        }
+
+        // Update last updated timestamp
+        function updateLastUpdated() {
+            const now = new Date();
+            const formatted = now.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('lastUpdated').textContent = formatted;
+        }
+
+        // Quick action functions
+        function showAnalytics() {
+            alert('Analytics Dashboard is coming soon! This will provide detailed insights into:\n\n• Customer engagement metrics\n• Email campaign performance\n• AI matching accuracy\n• Revenue attribution\n• Customer lifetime value');
+        }
+
+        async function runHealthCheck() {
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '🔄 Checking...';
+            btn.disabled = true;
+
+            try {
+                // Check API health
+                const response = await fetch('/api/customers');
+                if (response.ok) {
+                    btn.textContent = '✅ System Healthy';
+                    btn.className = 'action-btn btn-success';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.className = 'action-btn btn-success';
+                        btn.disabled = false;
+                    }, 2000);
+                } else {
+                    throw new Error('API check failed');
+                }
+            } catch (error) {
+                btn.textContent = '❌ System Issues';
+                btn.className = 'action-btn btn-danger';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.className = 'action-btn btn-success';
+                    btn.disabled = false;
+                }, 2000);
+            }
+        }
+
+        function exportData() {
+            alert('Data export functionality will allow you to export:\n\n• Customer database (CSV/JSON)\n• Product catalog\n• Email campaign results\n• AI matching history\n• Analytics reports');
+        }
+
+        function viewLogs() {
+            alert('System logs will show:\n\n• API request logs\n• Email sending status\n• AI matching results\n• Error logs\n• Performance metrics');
+        }
+
+        // Add some interactivity to stat cards
+        document.querySelectorAll('.stat-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const label = this.querySelector('.stat-label').textContent;
+                
+                switch(label) {
+                    case 'Total Customers':
+                        window.location.href = '/customers';
+                        break;
+                    case 'Available Products':
+                        window.location.href = '/ai-products';
+                        break;
+                    case 'Emails Sent Today':
+                        alert('Email analytics coming soon! This will show detailed email metrics.');
+                        break;
+                    case 'AI Matches Made':
+                        window.location.href = '/intelligent-matcher';
+                        break;
+                }
+            });
+        });
+
+        // Add hover effects with data tips
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.cursor = 'pointer';
+            });
+        });
+    </script>
+</body>
+</html>

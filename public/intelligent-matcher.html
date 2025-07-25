@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏦 Customer Bank Intelligent Product Matcher</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e1e5e9;
+            padding-bottom: 10px;
+        }
+        
+        .customer-selection {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        
+        .customer-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .customer-item:last-child {
+            border-bottom: none;
+        }
+        
+        .customer-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .customer-info {
+            flex: 1;
+        }
+        
+        .customer-name {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .customer-details {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 2px;
+        }
+        
+        .selection-controls {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+        
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+            color: #333;
+        }
+        
+        .btn-large {
+            padding: 15px 30px;
+            font-size: 16px;
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .progress-section {
+            margin-top: 30px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .status-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .results-section {
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .result-card {
+            background: #f8f9fa;
+            border: 1px solid #e1e5e9;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .result-card.success {
+            border-left: 4px solid #28a745;
+        }
+        
+        .result-card.error {
+            border-left: 4px solid #dc3545;
+        }
+        
+        .result-customer {
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+        
+        .result-product {
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .result-confidence {
+            background: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .result-reason {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+        
+        .result-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 12px;
+            border-radius: 15px;
+        }
+        
+        .btn-send-email {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-send-email:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(23, 162, 184, 0.4);
+        }
+        
+        .btn-send-email:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-info {
+            background: linear-gradient(135deg, #17a2b8, #138496);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+        }
+        
+        .btn-info:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(23, 162, 184, 0.4);
+        }
+        
+        .bulk-actions {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .bulk-actions.show {
+            display: block;
+        }
+        
+        .email-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .email-status.sent {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .email-status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .email-status.failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+        
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            border-top-color: #2a5298;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .message.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .log-section {
+            background: #f8f9fa;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .log-entry {
+            margin: 5px 0;
+            padding: 2px 0;
+        }
+        
+        .log-entry.info {
+            color: #0c5460;
+        }
+        
+        .log-entry.success {
+            color: #155724;
+        }
+        
+        .log-entry.error {
+            color: #721c24;
+        }
+        
+        .log-entry.warning {
+            color: #856404;
+        }
+        
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .selection-controls {
+                flex-direction: column;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>🧠 Intelligent Product Matcher</h1>
+            <div class="nav-links">
+                <a href="/">Dashboard</a>
+                <a href="/customers">Customers</a>
+                <a href="/ai-products">Our Products</a>
+                <a href="/intelligent-matcher" style="background: #667eea; color: white;">Smart Matcher</a>
+                <a href="/employee-nudge">AI Tips</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <div class="main-grid">
+            <!-- Customer Selection Section -->
+            <div class="section">
+                <div class="section-title">👥 Customer Selection</div>
+                
+                <div class="selection-controls">
+                    <button class="btn btn-secondary" onclick="selectAllCustomers()">Select All</button>
+                    <button class="btn btn-secondary" onclick="clearSelection()">Clear All</button>
+                    <button class="btn btn-primary" onclick="selectActive()">Active Only</button>
+                </div>
+                
+                <div class="customer-selection" id="customerList">
+                    <div class="loading">Loading customers...</div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <div style="font-weight: bold; margin-bottom: 10px;">
+                        Selected: <span id="selectedCount">0</span> customers
+                    </div>
+                    
+                    <button class="btn btn-success btn-large" id="matchButton" onclick="matchProducts()" disabled>
+                        🎯 Match Best Offers with AI
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Product Information Section -->
+            <div class="section">
+                <div class="section-title">📦 Available Products</div>
+                
+                <div id="productsList">
+                    <div class="loading">Loading products...</div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-warning btn-large" id="emailButton" onclick="sendEmails()" disabled>
+                        📧 Send Personalized Emails via Resend
+                    </button>
+                    
+                    <button class="btn btn-info btn-large" id="testNudgeButton" onclick="testNudgeEmail()" style="margin-left: 10px;">
+                        🧠 Test Nudging Email
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Progress Section -->
+        <div class="progress-section" id="progressSection" style="display: none;">
+            <div class="section">
+                <div class="section-title">🔄 Processing Status</div>
+                
+                <div id="currentStep" style="margin-bottom: 15px; font-weight: bold;">
+                    Ready to start...
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                
+                <div id="progressText" style="text-align: center; margin-top: 10px;">
+                    0% Complete
+                </div>
+                
+                <div class="log-section" id="logSection">
+                    <div class="log-entry info">System initialized and ready</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Statistics Section -->
+        <div class="status-section" id="statsSection" style="display: none;">
+            <div class="section-title">📊 Matching Results</div>
+            
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats will be populated here -->
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <div class="section">
+                <div class="section-title">✅ Customer-Product Matches</div>
+                
+                <!-- Bulk Actions -->
+                <div class="bulk-actions" id="bulkActions">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div style="font-weight: bold; color: #1e3c72;">
+                            Bulk Email Actions
+                        </div>
+                        <div id="pendingEmailCount" style="color: #666; font-size: 0.9rem;">
+                            <!-- Will be populated dynamically -->
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <button class="btn btn-success" id="sendAllPendingBtn" onclick="sendAllPendingEmails()" disabled>
+                            📧 Send All Pending Emails
+                        </button>
+                        <button class="btn btn-secondary" id="selectAllPendingBtn" onclick="selectAllPending()">
+                            ☑️ Select All Pending
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearAllSelections()">
+                            ❌ Clear Selections
+                        </button>
+                        <button class="btn btn-primary" id="sendSelectedBtn" onclick="sendSelectedEmails()" disabled>
+                            📤 Send Selected Emails
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="results-grid" id="resultsGrid">
+                    <!-- Results will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allCustomers = [];
+        let allProducts = [];
+        let selectedCustomers = [];
+        let matchingResults = [];
+        let emailResults = [];
+        let isProcessing = false;
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCustomers();
+            loadProducts();
+        });
+
+        // Load customers from the server
+        async function loadCustomers() {
+            try {
+                const response = await fetch('/api/customers');
+                allCustomers = await response.json();
+                displayCustomers();
+            } catch (error) {
+                showMessage('Error loading customers: ' + error.message, 'error');
+            }
+        }
+
+        // Load products from the server
+        async function loadProducts() {
+            try {
+                const response = await fetch('/api/products?status=active');
+                const data = await response.json();
+                allProducts = data.products || [];
+                displayProducts();
+            } catch (error) {
+                showMessage('Error loading products: ' + error.message, 'error');
+            }
+        }
+
+        // Display customers in the selection list
+        function displayCustomers() {
+            const container = document.getElementById('customerList');
+            
+            if (allCustomers.length === 0) {
+                container.innerHTML = '<div class="message info">No customers found.</div>';
+                return;
+            }
+            
+            const customerItems = allCustomers.map((customer, index) => `
+                <div class="customer-item">
+                    <input type="checkbox" id="customer_${index}" value="${index}" onchange="updateSelection()">
+                    <label for="customer_${index}" class="customer-info">
+                        <div class="customer-name">${customer.first_name} ${customer.last_name}</div>
+                        <div class="customer-details">
+                            ${customer.city || 'Location not specified'}
+                            ${customer.profile ? ' • Has profile data' : ''}
+                        </div>
+                    </label>
+                </div>
+            `).join('');
+            
+            container.innerHTML = customerItems;
+        }
+
+        // Display available products
+        function displayProducts() {
+            const container = document.getElementById('productsList');
+            
+            if (allProducts.length === 0) {
+                container.innerHTML = '<div class="message info">No active products found.</div>';
+                return;
+            }
+            
+            const productItems = allProducts.map(product => `
+                <div style="margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                    <div style="font-weight: bold; color: #1e3c72; margin-bottom: 5px;">
+                        ${product.name}
+                    </div>
+                    <div style="font-size: 0.9rem; color: #666; margin-bottom: 5px;">
+                        Type: ${product.type} • Status: ${product.status}
+                    </div>
+                    <div style="font-size: 0.9rem; color: #666;">
+                        ${product.description.substring(0, 100)}...
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = productItems;
+        }
+
+        // Update selection when checkboxes change
+        function updateSelection() {
+            const checkboxes = document.querySelectorAll('#customerList input[type="checkbox"]:checked');
+            selectedCustomers = Array.from(checkboxes).map(cb => allCustomers[parseInt(cb.value)]);
+            
+            document.getElementById('selectedCount').textContent = selectedCustomers.length;
+            document.getElementById('matchButton').disabled = selectedCustomers.length === 0 || isProcessing;
+        }
+
+        // Select all customers
+        function selectAllCustomers() {
+            const checkboxes = document.querySelectorAll('#customerList input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = true);
+            updateSelection();
+        }
+
+        // Clear all selections
+        function clearSelection() {
+            const checkboxes = document.querySelectorAll('#customerList input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = false);
+            updateSelection();
+        }
+
+        // Select only customers with profiles (simulated "active" customers)
+        function selectActive() {
+            const checkboxes = document.querySelectorAll('#customerList input[type="checkbox"]');
+            checkboxes.forEach((cb, index) => {
+                const customer = allCustomers[index];
+                cb.checked = customer.profile && customer.profile.length > 0;
+            });
+            updateSelection();
+        }
+
+        // Match products using AI
+        async function matchProducts() {
+            if (selectedCustomers.length === 0 || isProcessing) return;
+            
+            isProcessing = true;
+            document.getElementById('matchButton').disabled = true;
+            document.getElementById('emailButton').disabled = true;
+            
+            showProgressSection();
+            updateProgress(0, 'Starting AI-powered product matching...');
+            addLogEntry('info', 'Initializing product matching for ' + selectedCustomers.length + ' customers');
+            
+            try {
+                updateProgress(20, 'Sending data to AI matching service...');
+                addLogEntry('info', 'Analyzing customer profiles and available products');
+                
+                const response = await fetch('/api/ai/match-products', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        customers: selectedCustomers,
+                        products: allProducts
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                updateProgress(60, 'Processing AI recommendations...');
+                const data = await response.json();
+                
+                if (data.success) {
+                    matchingResults = data.matches;
+                    updateProgress(100, 'AI matching completed successfully!');
+                    addLogEntry('success', `Successfully matched ${matchingResults.filter(m => m.success).length}/${matchingResults.length} customers`);
+                    
+                    displayResults();
+                    showStatistics();
+                    
+                    // Enable email button if we have successful matches
+                    const successfulMatches = matchingResults.filter(m => m.success).length;
+                    if (successfulMatches > 0) {
+                        document.getElementById('emailButton').disabled = false;
+                        addLogEntry('info', 'Email sending is now available');
+                    }
+                    
+                    showMessage(`Successfully matched ${successfulMatches} customers with optimal products!`, 'success');
+                } else {
+                    throw new Error(data.error || 'Unknown error occurred');
+                }
+            } catch (error) {
+                updateProgress(0, 'Matching failed');
+                addLogEntry('error', 'Error: ' + error.message);
+                showMessage('Error during product matching: ' + error.message, 'error');
+            } finally {
+                isProcessing = false;
+                document.getElementById('matchButton').disabled = false;
+            }
+        }
+
+        // Send personalized emails
+        async function sendEmails() {
+            if (matchingResults.length === 0 || isProcessing) return;
+            
+            const successfulMatches = matchingResults.filter(m => m.success);
+            if (successfulMatches.length === 0) {
+                showMessage('No successful matches available for email sending', 'error');
+                return;
+            }
+            
+            if (!confirm(`Send personalized emails to ${successfulMatches.length} customers using Resend API?`)) {
+                return;
+            }
+            
+            isProcessing = true;
+            document.getElementById('emailButton').disabled = true;
+            document.getElementById('matchButton').disabled = true;
+            
+            updateProgress(0, 'Initializing email sending process...');
+            addLogEntry('info', `Starting email delivery for ${successfulMatches.length} customers via Resend`);
+            
+            try {
+                // Simulate progress steps for better user experience
+                updateProgress(10, 'Generating personalized email content...');
+                addLogEntry('info', 'Creating personalized email content using AI recommendations');
+                
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Small delay for UX
+                
+                updateProgress(30, 'Connecting to Resend email service...');
+                addLogEntry('info', 'Establishing connection to Resend API');
+                
+                const response = await fetch('/api/ai/send-matched-emails', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        matches: successfulMatches
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                updateProgress(60, 'Processing email generation...');
+                addLogEntry('info', 'Generating personalized email content for each customer');
+                
+                await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate processing time
+                
+                updateProgress(80, 'Sending emails via Resend API...');
+                addLogEntry('info', 'Delivering emails to customer inboxes');
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    emailResults = data.emailResults;
+                    updateProgress(100, 'Email campaign completed successfully!');
+                    
+                    const sentCount = emailResults.filter(r => r.success).length;
+                    addLogEntry('success', `Successfully sent ${sentCount}/${emailResults.length} emails via Resend`);
+                    addLogEntry('info', `Generated ${data.generatedEmails} personalized email content pieces`);
+                    
+                    // Show detailed statistics
+                    if (data.summary) {
+                        addLogEntry('info', `Email Summary: Generated ${data.summary.emailsGenerated}, Sent ${data.summary.successfulSends}, Failed ${data.summary.failedSends}`);
+                    }
+                    
+                    updateResultsWithEmailStatus();
+                    showMessage(`Email campaign completed! ${sentCount} emails sent successfully via Resend.`, 'success');
+                } else {
+                    throw new Error(data.error || 'Unknown error occurred');
+                }
+            } catch (error) {
+                updateProgress(0, 'Email sending failed');
+                addLogEntry('error', 'Email error: ' + error.message);
+                showMessage('Error sending emails: ' + error.message, 'error');
+            } finally {
+                isProcessing = false;
+                document.getElementById('matchButton').disabled = false;
+            }
+        }
+
+        // Test nudging email generation for a single customer
+        async function testNudgeEmail() {
+            const selectedCustomers = customers.filter(c => c.selected);
+            
+            if (selectedCustomers.length === 0) {
+                showMessage('Please select a customer to test nudging email generation.', 'warning');
+                return;
+            }
+            
+            if (selectedCustomers.length > 1) {
+                showMessage('Please select only one customer for nudging email testing.', 'warning');
+                return;
+            }
+            
+            const customer = selectedCustomers[0];
+            
+            try {
+                showProgressSection();
+                updateProgress(20, 'Generating AI-powered nudging email...');
+                addLogEntry('info', `Testing nudging email for ${customer.first_name} ${customer.last_name}`);
+                
+                const response = await fetch('/api/ai/test-nudge-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        customerId: customer.id,
+                        productType: 'Premium Savings Account'
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                updateProgress(60, 'Analyzing psychological nudging techniques...');
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateProgress(100, 'Nudging email test completed!');
+                    addLogEntry('success', `Nudging email generated for ${customer.first_name} ${customer.last_name}`);
+                    addLogEntry('info', `Applied techniques: ${data.nudgeEmail.nudgingTechniques.join(', ')}`);
+                    addLogEntry('info', `Subject: ${data.nudgeEmail.subject}`);
+                    
+                    // Display the generated email in a modal or new window
+                    showNudgeEmailPreview(data);
+                    
+                    showMessage('Nudging email test completed successfully! Check the preview.', 'success');
+                } else {
+                    throw new Error(data.error || 'Unknown error occurred');
+                }
+            } catch (error) {
+                updateProgress(0, 'Nudging email test failed');
+                addLogEntry('error', 'Nudging test error: ' + error.message);
+                showMessage('Error testing nudging email: ' + error.message, 'error');
+            }
+        }
+        
+        // Show nudge email preview
+        function showNudgeEmailPreview(data) {
+            const modalHTML = `
+                <div id="nudgePreviewModal" style="
+                    position: fixed; 
+                    top: 0; 
+                    left: 0; 
+                    width: 100%; 
+                    height: 100%; 
+                    background: rgba(0,0,0,0.8); 
+                    z-index: 10000; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center;
+                ">
+                    <div style="
+                        background: white; 
+                        max-width: 90%; 
+                        max-height: 90%; 
+                        border-radius: 15px; 
+                        overflow: hidden; 
+                        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                    ">
+                        <div style="
+                            background: linear-gradient(135deg, #667eea, #764ba2); 
+                            color: white; 
+                            padding: 20px; 
+                            display: flex; 
+                            justify-content: space-between; 
+                            align-items: center;
+                        ">
+                            <h3>🧠 Nudging Email Preview - ${data.customer.first_name} ${data.customer.last_name}</h3>
+                            <button onclick="closeNudgePreview()" style="
+                                background: rgba(255,255,255,0.2); 
+                                border: none; 
+                                color: white; 
+                                padding: 8px 12px; 
+                                border-radius: 5px; 
+                                cursor: pointer;
+                            ">✕ Close</button>
+                        </div>
+                        <div style="padding: 20px; max-height: 70vh; overflow-y: auto;">
+                            <div style="margin-bottom: 20px;">
+                                <h4>📧 Subject Line:</h4>
+                                <p style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-weight: bold;">${data.nudgeEmail.subject}</p>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <h4>🧠 Applied Nudging Techniques:</h4>
+                                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                    ${data.nudgeEmail.nudgingTechniques.map(technique => 
+                                        `<span style="background: #667eea; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">${technique}</span>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                            <div>
+                                <h4>📝 Email Content:</h4>
+                                <iframe srcdoc="${data.nudgeEmail.htmlContent.replace(/"/g, '&quot;')}" style="
+                                    width: 100%; 
+                                    height: 400px; 
+                                    border: 1px solid #ddd; 
+                                    border-radius: 5px;
+                                "></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
+        
+        // Close nudge email preview
+        function closeNudgePreview() {
+            const modal = document.getElementById('nudgePreviewModal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // Show progress section
+        function showProgressSection() {
+            document.getElementById('progressSection').style.display = 'block';
+        }
+
+        // Update progress bar and status
+        function updateProgress(percentage, message) {
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = percentage + '% Complete';
+            document.getElementById('currentStep').textContent = message;
+        }
+
+        // Add log entry
+        function addLogEntry(type, message) {
+            const logSection = document.getElementById('logSection');
+            const timestamp = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${timestamp}] ${message}`;
+            logSection.appendChild(entry);
+            logSection.scrollTop = logSection.scrollHeight;
+        }
+
+        // Display matching results
+        function displayResults() {
+            const container = document.getElementById('resultsGrid');
+            const resultsSection = document.getElementById('resultsSection');
+            const bulkActions = document.getElementById('bulkActions');
+            
+            if (matchingResults.length === 0) {
+                container.innerHTML = '<div class="message info">No matching results to display.</div>';
+                return;
+            }
+            
+            const resultCards = matchingResults.map((match, index) => {
+                if (!match.success) {
+                    return `
+                        <div class="result-card error">
+                            <div class="result-customer">${match.customer.first_name} ${match.customer.last_name}</div>
+                            <div style="color: #dc3545; font-weight: bold;">Matching Failed</div>
+                            <div class="result-reason">${match.error}</div>
+                        </div>
+                    `;
+                }
+                
+                const rec = match.recommendation;
+                const isEmailSent = emailResults.some(e => 
+                    e.customer.first_name === match.customer.first_name && 
+                    e.customer.last_name === match.customer.last_name && 
+                    e.success
+                );
+                
+                return `
+                    <div class="result-card success" id="result_${index}" data-match-index="${index}">
+                        <div class="email-status pending" id="emailStatus_${index}">
+                            ${isEmailSent ? 'Email Sent ✓' : 'Email Pending'}
+                        </div>
+                        
+                        <!-- Selection checkbox -->
+                        <div style="position: absolute; top: 10px; left: 10px;">
+                            <input type="checkbox" id="emailSelect_${index}" 
+                                   onchange="updateEmailSelection()" 
+                                   ${isEmailSent ? 'disabled' : ''}>
+                        </div>
+                        
+                        <div class="result-customer customer-name" style="margin-top: 15px;">
+                            ${match.customer.first_name} ${match.customer.last_name}
+                        </div>
+                        <div class="result-product">${rec.recommendedProduct.productName}</div>
+                        <div class="result-confidence">Confidence: ${rec.recommendedProduct.confidenceScore}%</div>
+                        <div class="result-reason">${rec.recommendedProduct.matchReason}</div>
+                        
+                        <div style="margin: 10px 0;">
+                            <strong>Key Benefits:</strong><br>
+                            • ${rec.personalizationInsights.primaryBenefit}<br>
+                            ${rec.personalizationInsights.secondaryBenefits.map(b => `• ${b}`).join('<br>')}
+                        </div>
+                        
+                        <div style="margin: 10px 0; font-size: 0.9rem; color: #666;">
+                            <strong>Email Subject:</strong> ${rec.emailSubject}
+                        </div>
+                        
+                        <div class="result-actions">
+                            <button class="btn btn-send-email btn-small" 
+                                    id="sendBtn_${index}"
+                                    onclick="sendSingleEmail(${index})" 
+                                    ${isEmailSent ? 'disabled' : ''}>
+                                ${isEmailSent ? '✓ Sent' : '📧 Send Email'}
+                            </button>
+                            
+                            <button class="btn btn-secondary btn-small" 
+                                    onclick="previewEmail(${index})">
+                                👁️ Preview
+                            </button>
+                            
+                            ${isEmailSent ? `
+                                <button class="btn btn-primary btn-small" 
+                                        onclick="resendEmail(${index})">
+                                    🔄 Resend
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = resultCards;
+            resultsSection.style.display = 'block';
+            
+            // Show bulk actions if we have successful matches
+            const successfulMatches = matchingResults.filter(m => m.success);
+            if (successfulMatches.length > 0) {
+                bulkActions.classList.add('show');
+                updateEmailSelection(); // Initialize selection state
+            }
+        }
+
+        // Show statistics
+        function showStatistics() {
+            const statsSection = document.getElementById('statsSection');
+            const statsGrid = document.getElementById('statsGrid');
+            
+            const successfulMatches = matchingResults.filter(m => m.success);
+            const averageConfidence = successfulMatches.length > 0 
+                ? Math.round(successfulMatches.reduce((sum, m) => sum + m.recommendation.recommendedProduct.confidenceScore, 0) / successfulMatches.length)
+                : 0;
+            
+            const productDistribution = {};
+            successfulMatches.forEach(match => {
+                const productName = match.recommendation.recommendedProduct.productName;
+                productDistribution[productName] = (productDistribution[productName] || 0) + 1;
+            });
+            
+            const topProduct = Object.keys(productDistribution).reduce((a, b) => 
+                productDistribution[a] > productDistribution[b] ? a : b, '');
+            
+            statsGrid.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${matchingResults.length}</div>
+                    <div class="stat-label">Total Processed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${successfulMatches.length}</div>
+                    <div class="stat-label">Successful Matches</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${averageConfidence}%</div>
+                    <div class="stat-label">Avg Confidence</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${Object.keys(productDistribution).length}</div>
+                    <div class="stat-label">Products Matched</div>
+                </div>
+            `;
+            
+            if (topProduct) {
+                statsGrid.innerHTML += `
+                    <div class="stat-card">
+                        <div class="stat-number">${productDistribution[topProduct]}</div>
+                        <div class="stat-label">Top Product: ${topProduct.substring(0, 15)}...</div>
+                    </div>
+                `;
+            }
+            
+            statsSection.style.display = 'block';
+        }
+
+        // Update results with email status
+        function updateResultsWithEmailStatus() {
+            emailResults.forEach((emailResult, index) => {
+                const emailStatusElement = document.getElementById(`emailStatus_${index}`);
+                if (emailStatusElement) {
+                    if (emailResult.success) {
+                        emailStatusElement.textContent = 'Email Sent';
+                        emailStatusElement.className = 'email-status sent';
+                    } else {
+                        emailStatusElement.textContent = 'Email Failed';
+                        emailStatusElement.className = 'email-status failed';
+                    }
+                }
+            });
+        }
+
+        // Update batch email status in real-time
+        function updateBatchEmailStatus(batchResults) {
+            batchResults.forEach((result) => {
+                // Find the matching result index based on customer name
+                const matchIndex = matchingResults.findIndex(match => 
+                    match.success && 
+                    match.customer.first_name === result.customer.first_name &&
+                    match.customer.last_name === result.customer.last_name
+                );
+                
+                if (matchIndex !== -1) {
+                    const emailStatusElement = document.getElementById(`emailStatus_${matchIndex}`);
+                    if (emailStatusElement) {
+                        if (result.success) {
+                            emailStatusElement.textContent = 'Email Sent ✓';
+                            emailStatusElement.className = 'email-status sent';
+                            emailStatusElement.title = `Sent at: ${new Date(result.sentAt).toLocaleTimeString()}`;
+                        } else {
+                            emailStatusElement.textContent = 'Email Failed ✗';
+                            emailStatusElement.className = 'email-status failed';
+                            emailStatusElement.title = `Error: ${result.error}`;
+                        }
+                    }
+                }
+            });
+        }
+
+        // Show message to user
+        function showMessage(message, type = 'info') {
+            // Remove existing messages
+            const existingMessages = document.querySelectorAll('.message.floating');
+            existingMessages.forEach(msg => msg.remove());
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type} floating`;
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '20px';
+            messageDiv.style.right = '20px';
+            messageDiv.style.zIndex = '9999';
+            messageDiv.style.maxWidth = '400px';
+            messageDiv.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+            messageDiv.textContent = message;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+
+        // Update email selection state
+        function updateEmailSelection() {
+            const checkboxes = document.querySelectorAll('[id^="emailSelect_"]:not(:disabled)');
+            const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const pendingCount = checkboxes.length;
+            
+            // Update buttons
+            document.getElementById('sendSelectedBtn').disabled = selectedCount === 0 || isProcessing;
+            document.getElementById('sendAllPendingBtn').disabled = pendingCount === 0 || isProcessing;
+            
+            // Update counter
+            document.getElementById('pendingEmailCount').textContent = 
+                `${selectedCount} selected / ${pendingCount} pending emails`;
+        }
+
+        // Select all pending emails
+        function selectAllPending() {
+            const checkboxes = document.querySelectorAll('[id^="emailSelect_"]:not(:disabled)');
+            checkboxes.forEach(cb => cb.checked = true);
+            updateEmailSelection();
+        }
+
+        // Clear all selections
+        function clearAllSelections() {
+            const checkboxes = document.querySelectorAll('[id^="emailSelect_"]');
+            checkboxes.forEach(cb => cb.checked = false);
+            updateEmailSelection();
+        }
+
+        // Send a single email
+        async function sendSingleEmail(index) {
+            console.log('Send single email clicked for index:', index);
+            
+            if (isProcessing) {
+                console.log('Already processing, skipping');
+                return;
+            }
+            
+            const match = matchingResults[index];
+            if (!match || !match.success) {
+                console.log('Invalid match data:', match);
+                return;
+            }
+            
+            const customerName = `${match.customer.first_name} ${match.customer.last_name}`;
+            console.log('Sending email to:', customerName);
+            
+            if (!confirm(`Send personalized email to ${customerName}?`)) {
+                return;
+            }
+            
+            const sendBtn = document.getElementById(`sendBtn_${index}`);
+            const originalText = sendBtn.textContent;
+            
+            try {
+                sendBtn.disabled = true;
+                sendBtn.textContent = '⏳ Sending...';
+                
+                addLogEntry('info', `Sending individual email to ${customerName}`);
+                console.log('Making API request to send email...');
+                
+                const response = await fetch('/api/ai/send-matched-emails', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ matches: [match] })
+                });
+                
+                console.log('API response status:', response.status);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.log('API error response:', errorText);
+                    throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
+                }
+                
+                const data = await response.json();
+                console.log('API response data:', data);
+                
+                if (data.success && data.emailResults.length > 0) {
+                    const result = data.emailResults[0];
+                    
+                    if (result.success) {
+                        // Update UI to show sent status
+                        sendBtn.textContent = '✓ Sent';
+                        sendBtn.className = 'btn btn-success btn-small';
+                        
+                        const emailStatus = document.getElementById(`emailStatus_${index}`);
+                        emailStatus.textContent = 'Email Sent ✓';
+                        emailStatus.className = 'email-status sent';
+                        
+                        const checkbox = document.getElementById(`emailSelect_${index}`);
+                        checkbox.disabled = true;
+                        checkbox.checked = false;
+                        
+                        // Add resend button
+                        const resultCard = document.getElementById(`result_${index}`);
+                        const actionsDiv = resultCard.querySelector('.result-actions');
+                        actionsDiv.innerHTML += `
+                            <button class="btn btn-primary btn-small" onclick="resendEmail(${index})">
+                                🔄 Resend
+                            </button>
+                        `;
+                        
+                        addLogEntry('success', `Email sent successfully to ${customerName} via Resend`);
+                        showMessage(`Email sent successfully to ${customerName} via Resend!`, 'success');
+                        
+                        // Update email results array
+                        emailResults.push(result);
+                        updateEmailSelection();
+                        
+                    } else {
+                        throw new Error(result.error || 'Email sending failed');
+                    }
+                } else {
+                    throw new Error(data.error || 'Unknown error occurred');
+                }
+                
+            } catch (error) {
+                console.error('Email sending error:', error);
+                sendBtn.disabled = false;
+                sendBtn.textContent = originalText;
+                addLogEntry('error', `Failed to send email to ${customerName}: ${error.message}`);
+                showMessage(`Failed to send email to ${customerName}: ${error.message}`, 'error');
+            }
+        }
+
+        // Send all pending emails
+        async function sendAllPendingEmails() {
+            const pendingMatches = matchingResults.filter((match, index) => {
+                const isEmailSent = emailResults.some(e => 
+                    e.customer.first_name === match.customer.first_name && 
+                    e.customer.last_name === match.customer.last_name && 
+                    e.success
+                );
+                return match.success && !isEmailSent;
+            });
+            
+            console.log('Pending matches for sending:', pendingMatches.length);
+            console.log('All matching results:', matchingResults.length);
+            console.log('Email results so far:', emailResults.length);
+            
+            if (pendingMatches.length === 0) {
+                showMessage('No pending emails to send', 'info');
+                return;
+            }
+            
+            if (!confirm(`Send emails to all ${pendingMatches.length} customers with pending offers?`)) {
+                return;
+            }
+            
+            await sendBatchEmails(pendingMatches, 'all pending');
+        }
+
+        // Send selected emails
+        async function sendSelectedEmails() {
+            const selectedMatches = [];
+            
+            matchingResults.forEach((match, index) => {
+                const checkbox = document.getElementById(`emailSelect_${index}`);
+                if (checkbox && checkbox.checked && !checkbox.disabled) {
+                    selectedMatches.push(match);
+                }
+            });
+            
+            console.log('Selected matches for sending:', selectedMatches.length);
+            
+            if (selectedMatches.length === 0) {
+                showMessage('No emails selected for sending', 'info');
+                return;
+            }
+            
+            if (!confirm(`Send emails to ${selectedMatches.length} selected customers?`)) {
+                return;
+            }
+            
+            await sendBatchEmails(selectedMatches, 'selected');
+        }
+
+        // Helper function to send batch emails
+        async function sendBatchEmails(matches, type) {
+            if (isProcessing) return;
+            
+            isProcessing = true;
+            document.getElementById('sendAllPendingBtn').disabled = true;
+            document.getElementById('sendSelectedBtn').disabled = true;
+            
+            // Disable all individual send buttons
+            matches.forEach((match, idx) => {
+                const globalIndex = matchingResults.findIndex(m => m === match);
+                const sendBtn = document.getElementById(`sendBtn_${globalIndex}`);
+                if (sendBtn && !sendBtn.disabled) sendBtn.disabled = true;
+            });
+            
+            try {
+                addLogEntry('info', `Starting batch email sending for ${matches.length} ${type} customers via Resend`);
+                
+                // Show progress
+                updateProgress(10, `Preparing ${matches.length} emails for sending...`);
+                
+                const response = await fetch('/api/ai/send-matched-emails', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ matches: matches })
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
+                }
+                
+                updateProgress(50, 'Processing email generation and sending...');
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    const successCount = data.emailResults.filter(r => r.success).length;
+                    updateProgress(100, `Batch sending completed: ${successCount}/${data.emailResults.length} emails sent`);
+                    addLogEntry('success', `Batch sending completed: ${successCount}/${data.emailResults.length} emails sent via Resend`);
+                    
+                    // Update UI for each result
+                    data.emailResults.forEach(result => {
+                        const matchIndex = matchingResults.findIndex(match => 
+                            match.customer.first_name === result.customer.first_name &&
+                            match.customer.last_name === result.customer.last_name
+                        );
+                        
+                        if (matchIndex !== -1) {
+                            const sendBtn = document.getElementById(`sendBtn_${matchIndex}`);
+                            const emailStatus = document.getElementById(`emailStatus_${matchIndex}`);
+                            const checkbox = document.getElementById(`emailSelect_${matchIndex}`);
+                            
+                            if (result.success) {
+                                if (sendBtn) {
+                                    sendBtn.textContent = '✓ Sent';
+                                    sendBtn.className = 'btn btn-success btn-small';
+                                    sendBtn.disabled = true;
+                                }
+                                if (emailStatus) {
+                                    emailStatus.textContent = 'Email Sent ✓';
+                                    emailStatus.className = 'email-status sent';
+                                }
+                                if (checkbox) {
+                                    checkbox.disabled = true;
+                                    checkbox.checked = false;
+                                }
+                                
+                                // Add resend button if not already present
+                                const resultCard = document.getElementById(`result_${matchIndex}`);
+                                const actionsDiv = resultCard.querySelector('.result-actions');
+                                if (!actionsDiv.querySelector('[onclick*="resendEmail"]')) {
+                                    actionsDiv.innerHTML += `
+                                        <button class="btn btn-primary btn-small" onclick="resendEmail(${matchIndex})">
+                                            🔄 Resend
+                                        </button>
+                                    `;
+                                }
+                                
+                                addLogEntry('success', `Email sent to ${result.customer.first_name} ${result.customer.last_name} via Resend`);
+                            } else {
+                                if (sendBtn) sendBtn.disabled = false;
+                                addLogEntry('error', `Failed to send to ${result.customer.first_name}: ${result.error}`);
+                            }
+                        }
+                    });
+                    
+                    // Update email results array
+                    emailResults.push(...data.emailResults);
+                    updateEmailSelection();
+                    
+                    showMessage(`Batch email sending completed! ${successCount} emails sent successfully via Resend.`, 'success');
+                    
+                } else {
+                    throw new Error(data.error || 'Batch sending failed');
+                }
+                
+            } catch (error) {
+                updateProgress(0, 'Batch email sending failed');
+                addLogEntry('error', `Batch email error: ${error.message}`);
+                showMessage(`Error sending batch emails: ${error.message}`, 'error');
+                console.error('Batch email sending error:', error);
+                
+                // Re-enable buttons on error
+                matches.forEach((match, idx) => {
+                    const globalIndex = matchingResults.findIndex(m => m === match);
+                    const sendBtn = document.getElementById(`sendBtn_${globalIndex}`);
+                    if (sendBtn) sendBtn.disabled = false;
+                });
+                
+            } finally {
+                isProcessing = false;
+                updateEmailSelection();
+            }
+        }
+
+        // Preview email content with caching
+        async function previewEmail(index) {
+            const match = matchingResults[index];
+            if (!match || !match.success) return;
+            
+            try {
+                // Show loading indicator
+                const loadingModal = document.createElement('div');
+                loadingModal.id = 'loadingPreviewModal';
+                loadingModal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                `;
+                loadingModal.innerHTML = `
+                    <div style="
+                        background: white;
+                        padding: 30px;
+                        border-radius: 10px;
+                        text-align: center;
+                        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                    ">
+                        <div style="font-size: 2em; margin-bottom: 15px;">🤖</div>
+                        <h3>Generating Email Preview...</h3>
+                        <p>Using AI to create personalized content</p>
+                    </div>
+                `;
+                document.body.appendChild(loadingModal);
+
+                console.log('🤖 Generating email preview for match:', match);
+
+                // Call the new preview API endpoint
+                const response = await fetch('/api/ai/preview-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ match: match })
+                });
+
+                const data = await response.json();
+
+                // Remove loading modal
+                document.body.removeChild(loadingModal);
+
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to generate email preview');
+                }
+
+                const email = data.email;
+                const customer = match.customer;
+                const rec = match.recommendation;
+
+                // Cache indicator
+                const cacheStatus = data.cached ? 
+                    '<span style="color: #28a745; font-size: 0.9em;">💾 From Cache</span>' : 
+                    '<span style="color: #007bff; font-size: 0.9em;">🤖 Newly Generated</span>';
+
+                const previewContent = `
+                    <h3>📧 Email Preview ${cacheStatus}</h3>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #007bff;">
+                        <p><strong>To:</strong> ${customer.first_name} ${customer.last_name} (${customer.email || customer.first_name.toLowerCase() + '.' + customer.last_name.toLowerCase() + '@example.com'})</p>
+                        <p><strong>Subject:</strong> ${email.subject}</p>
+                        <p><strong>Product:</strong> ${rec.recommendedProduct.productName}</p>
+                        <p><strong>Confidence Score:</strong> ${rec.recommendedProduct.confidenceScore}%</p>
+                    </div>
+                    
+                    <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 15px 0; max-height: 400px; overflow-y: auto;">
+                        <h4 style="color: #333; margin-top: 0;">📄 Email Content</h4>
+                        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+                            ${email.content}
+                        </div>
+                    </div>
+
+                    <div style="background: #e9ecef; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4 style="margin-top: 0;">🎯 Match Details</h4>
+                        <p><strong>Match Reason:</strong> ${rec.reasons}</p>
+                        <p><strong>Primary Benefit:</strong> ${rec.personalizationInsights.primaryBenefit}</p>
+                        <p><strong>Key Benefits:</strong></p>
+                        <ul>
+                            ${rec.personalizationInsights.secondaryBenefits.map(b => `<li>${b}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button onclick="closeEmailPreview()" style="
+                            background: #6c757d;
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 5px;
+                            margin-right: 10px;
+                            cursor: pointer;
+                        ">Close Preview</button>
+                        <button onclick="sendCachedEmail(${index})" style="
+                            background: #28a745;
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        ">📧 Send This Email</button>
+                    </div>
+                `;
+                
+                // Create preview modal
+                const previewModal = document.createElement('div');
+                previewModal.id = 'emailPreviewModal';
+                previewModal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                    overflow-y: auto;
+                `;
+                previewModal.innerHTML = `
+                    <div style="
+                        background: white;
+                        margin: 20px;
+                        padding: 30px;
+                        border-radius: 15px;
+                        max-width: 800px;
+                        width: 90%;
+                        max-height: 90vh;
+                        overflow-y: auto;
+                        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+                    ">
+                        ${previewContent}
+                    </div>
+                `;
+                document.body.appendChild(previewModal);
+
+                // Store the email in the match for later sending
+                matchingResults[index].cachedEmail = email;
+
+                addLogEntry('success', `Email preview generated for ${customer.first_name} ${customer.last_name} ${data.cached ? '(from cache)' : '(newly generated)'}`);
+
+            } catch (error) {
+                // Remove loading modal if it exists
+                const loadingModal = document.getElementById('loadingPreviewModal');
+                if (loadingModal) {
+                    document.body.removeChild(loadingModal);
+                }
+
+                console.error('Error generating email preview:', error);
+                showMessage('Failed to generate email preview: ' + error.message, 'error');
+                addLogEntry('error', `Failed to generate email preview: ${error.message}`);
+            }
+        }
+
+        // Close email preview modal
+        function closeEmailPreview() {
+            const modal = document.getElementById('emailPreviewModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+
+        // Send cached email for a specific customer
+        async function sendCachedEmail(index) {
+            const match = matchingResults[index];
+            if (!match || !match.success) return;
+
+            if (!confirm(`Send email to ${match.customer.first_name} ${match.customer.last_name}?`)) {
+                return;
+            }
+
+            try {
+                addLogEntry('info', `Sending cached email to ${match.customer.first_name} ${match.customer.last_name}...`);
+
+                const response = await fetch('/api/ai/send-cached-emails', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        matches: [match]
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.emailResults && data.emailResults.length > 0) {
+                    const result = data.emailResults[0];
+                    if (result.success) {
+                        showMessage(`Email sent successfully to ${match.customer.first_name} ${match.customer.last_name}! Email ID: ${result.emailId}`, 'success');
+                        addLogEntry('success', `✅ Email sent to ${match.customer.first_name} ${match.customer.last_name} (ID: ${result.emailId})`);
+                        
+                        // Close the preview modal
+                        closeEmailPreview();
+                        
+                        // Update the UI to show email was sent
+                        updateMatchResultUI(index, 'sent');
+                    } else {
+                        throw new Error(result.error || 'Failed to send email');
+                    }
+                } else {
+                    throw new Error(data.error || 'Unexpected response format');
+                }
+
+            } catch (error) {
+                console.error('Error sending cached email:', error);
+                showMessage('Failed to send email: ' + error.message, 'error');
+                addLogEntry('error', `Failed to send email to ${match.customer.first_name} ${match.customer.last_name}: ${error.message}`);
+            }
+        }
+
+        // Update match result UI to show email status
+        function updateMatchResultUI(index, status) {
+            const resultElement = document.querySelector(`[data-match-index="${index}"]`);
+            if (resultElement) {
+                if (status === 'sent') {
+                    // Add sent indicator
+                    const sentBadge = document.createElement('span');
+                    sentBadge.style.cssText = `
+                        background: #28a745;
+                        color: white;
+                        padding: 4px 8px;
+                        border-radius: 12px;
+                        font-size: 0.8em;
+                        margin-left: 10px;
+                    `;
+                    sentBadge.textContent = '✅ Email Sent';
+                    
+                    const nameElement = resultElement.querySelector('.customer-name');
+                    if (nameElement && !nameElement.querySelector('.sent-badge')) {
+                        sentBadge.className = 'sent-badge';
+                        nameElement.appendChild(sentBadge);
+                    }
+                }
+            }
+        }
+
+        // Resend email
+        async function resendEmail(index) {
+            if (!confirm('Are you sure you want to resend this email?')) {
+                return;
+            }
+            
+            // Reset the email status and resend
+            const emailStatus = document.getElementById(`emailStatus_${index}`);
+            const sendBtn = document.getElementById(`sendBtn_${index}`);
+            
+            if (emailStatus) {
+                emailStatus.textContent = 'Email Pending';
+                emailStatus.className = 'email-status pending';
+            }
+            
+            if (sendBtn) {
+                sendBtn.textContent = '📧 Send Email';
+                sendBtn.className = 'btn btn-send-email btn-small';
+                sendBtn.disabled = false;
+            }
+            
+            // Remove from sent results and re-enable checkbox
+            const match = matchingResults[index];
+            emailResults = emailResults.filter(e => 
+                !(e.customer.first_name === match.customer.first_name && 
+                  e.customer.last_name === match.customer.last_name)
+            );
+            
+            const checkbox = document.getElementById(`emailSelect_${index}`);
+            if (checkbox) {
+                checkbox.disabled = false;
+            }
+            
+            updateEmailSelection();
+            addLogEntry('info', `Reset email status for ${match.customer.first_name} ${match.customer.last_name}`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏦 Customer Bank Financial Product Offer</title>
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        /* Main content */
+        .content {
+            padding: 40px;
+        }
+        
+        .greeting {
+            font-size: 18px;
+            color: #2a5298;
+            margin-bottom: 20px;
+        }
+        
+        .intro {
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        /* Product offer section */
+        .product-offer {
+            background-color: #f8f9fa;
+            border-left: 4px solid #2a5298;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .product-title {
+            font-size: 22px;
+            color: #1e3c72;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .product-details {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        /* Key benefits */
+        .benefits {
+            margin: 25px 0;
+        }
+        
+        .benefits h3 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .benefits ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .benefits li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .benefits li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+        
+        /* Terms and conditions */
+        .terms {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .terms h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .terms p {
+            font-size: 14px;
+            color: #856404;
+            line-height: 1.5;
+        }
+        
+        /* Contact section */
+        .contact {
+            background-color: #e9ecef;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .contact h3 {
+            color: #2a5298;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .contact-item {
+            font-size: 14px;
+        }
+        
+        .contact-item strong {
+            color: #1e3c72;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #1e3c72;
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .footer p {
+            font-size: 14px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        
+        .unsubscribe {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 20px;
+        }
+        
+        .unsubscribe a {
+            color: #a8c6f0;
+        }
+        
+        /* Responsive design */
+        @media only screen and (max-width: 600px) {
+            .header, .content, .footer {
+                padding: 25px 20px;
+            }
+            
+            .logo {
+                font-size: 28px;
+            }
+            
+            .product-title {
+                font-size: 20px;
+            }
+            
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🏦</div>
+            <div class="tagline">Your Financial Future Starts Here</div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <div class="greeting">
+                Hello {{customer_name}},
+            </div>
+            
+            <div class="intro">
+                We hope this message finds you well. At 🏦 Customer Bank, we're committed to helping our valued customers achieve their financial goals with tailored solutions that fit their unique needs.
+            </div>
+            
+            <!-- Product Offer Section -->
+            <div class="product-offer">
+                <div class="product-title">{{product_name}}</div>
+                <div class="product-details">
+                    {{product_details}}
+                </div>
+                
+                <div class="benefits">
+                    <h3>Key Benefits:</h3>
+                    <ul>
+                        <li>Competitive interest rates</li>
+                        <li>Flexible terms tailored to your needs</li>
+                        <li>Quick and easy application process</li>
+                        <li>Dedicated customer support</li>
+                        <li>No hidden fees or charges</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <a href="{{offer_link}}" class="cta-button">Accept This Offer</a>
+                <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                    This exclusive offer is valid until {{expiry_date}}
+                </p>
+            </div>
+            
+            <!-- Terms and Conditions -->
+            <div class="terms">
+                <h4>Important Information</h4>
+                <p>
+                    This offer is subject to credit approval and terms and conditions. Interest rates and terms may vary based on creditworthiness. Please review all terms carefully before accepting. This is a pre-qualified offer based on your account history with 🏦 Customer Bank.
+                </p>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="contact">
+                <h3>Questions? We're Here to Help</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>Phone:</strong><br>
+                        1-800-CUST-BANK (1-800-287-8226)
+                    </div>
+                    <div class="contact-item">
+                        <strong>Email:</strong><br>
+                        support@customerbank.com
+                    </div>
+                    <div class="contact-item">
+                        <strong>Online:</strong><br>
+                        Visit us at customerbank.com
+                    </div>
+                    <div class="contact-item">
+                        <strong>Hours:</strong><br>
+                        Mon-Fri: 8AM-8PM EST<br>
+                        Sat: 9AM-5PM EST
+                    </div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 16px;">
+                Thank you for choosing 🏦 Customer Bank as your trusted financial partner. We look forward to helping you achieve your financial goals.
+            </p>
+            
+            <p style="margin-top: 20px; font-size: 16px;">
+                Best regards,<br>
+                <strong>The 🏦 Customer Bank Team</strong>
+            </p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>🏦 Customer Bank</strong> | Member FDIC | Equal Housing Lender</p>
+            <p>123 Financial District, New York, NY 10004</p>
+            
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+            </div>
+            
+            <div class="unsubscribe">
+                <p>
+                    You received this email because you are a valued 🏦 Customer Bank customer.<br>
+                    <a href="{{unsubscribe_link}}">Unsubscribe</a> | 
+                    <a href="{{privacy_policy_link}}">Privacy Policy</a> | 
+                    <a href="{{terms_link}}">Terms of Service</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
